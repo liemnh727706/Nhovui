@@ -1,0 +1,6 @@
+# Giữ nguyên LF trong kho để bản dựng trên Linux và trên Windows ra kết quả giống nhau
+* text=auto eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.apk binary
+*.png binary

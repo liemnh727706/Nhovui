@@ -1,0 +1,97 @@
+name: Dựng APK
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    name: Dựng APK debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Dựng lại www/ và assets/ từ src/ — bước này cũng tự kiểm tra
+      # những lỗi từng gặp: thiếu meta charset, thiếu viewport, lỗi cú pháp JS.
+      - name: Dựng trang web từ mã nguồn
+        run: node tools/build.mjs
+
+      - name: Kiểm tra www/ và assets/ khớp với src/
+        run: |
+          if ! git diff --quiet -- www android/app/src/main/assets; then
+            echo "::error::www/ hoặc assets/ chưa khớp với src/. Chạy 'node tools/build.mjs' rồi commit lại."
+            git diff --stat -- www android/app/src/main/assets
+            exit 1
+          fi
+
+      - name: Cài JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Cài Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Cài platform và build-tools
+        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Dựng APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Đặt tên file theo phiên bản
+        id: ten
+        run: |
+          v=$(grep -oP 'versionName\s+"\K[^"]+' android/app/build.gradle)
+          f="NhoVui-${v}-debug.apk"
+          cp android/app/build/outputs/apk/debug/app-debug.apk "$f"
+          echo "file=$f" >> "$GITHUB_OUTPUT"
+          echo "Đã dựng $f ($(du -h "$f" | cut -f1))"
+
+      - name: Kiểm tra APK có quyền ghi âm
+        run: |
+          aapt="$ANDROID_HOME/build-tools/36.0.0/aapt2"
+          "$aapt" dump badging "${{ steps.ten.outputs.file }}" > badging.txt
+          grep -q "android.permission.RECORD_AUDIO" badging.txt \
+            || { echo "::error::APK thiếu quyền RECORD_AUDIO"; exit 1; }
+          grep -q "package: name='vn.nhovui.app'" badging.txt \
+            || { echo "::error::Sai tên gói"; exit 1; }
+          echo "APK đúng gói và đủ quyền ghi âm."
+
+      - name: Tải APK lên làm hiện vật
+        uses: actions/upload-artifact@v4
+        with:
+          name: NhoVui-apk
+          path: ${{ steps.ten.outputs.file }}
+          retention-days: 90
+
+      - name: Phát hành khi gắn thẻ phiên bản
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.ten.outputs.file }}
+          body: |
+            **Nhớ Vui** — ứng dụng luyện trí nhớ hằng ngày cho người sa sút trí tuệ.
+
+            Tải file `.apk` bên dưới, chép vào điện thoại Android (từ bản 10 trở lên),
+            bật "Cài ứng dụng không rõ nguồn gốc" rồi mở để cài.
+
+            Ứng dụng chạy hoàn toàn ngoại tuyến. Mọi dữ liệu — tiến trình, ảnh người thân,
+            nhật ký hồi tưởng, bản ghi âm — chỉ nằm trong máy, không gửi đi đâu.
