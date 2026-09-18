@@ -1,0 +1,54 @@
+name: Đăng trang web
+
+# Trang web chạy trên https của GitHub Pages. Đây là điều kiện bắt buộc để
+# micro hoạt động: mở file HTML trực tiếp trên điện thoại (file://) thì Chrome
+# và Safari đều khóa micro và không hiện cửa sổ hỏi quyền.
+# Có https rồi thì cả iPhone lẫn Android đều cài được lên màn hình chính.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  dang:
+    name: Dựng và đăng
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.dang.outputs.page_url }}
+
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Dựng trang web từ mã nguồn
+        run: |
+          node tools/lam-bieu-tuong.mjs
+          node tools/build.mjs
+
+      - name: Chuẩn bị Pages
+        uses: actions/configure-pages@v5
+
+      - name: Đóng gói thư mục www
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: www
+
+      - name: Đăng lên Pages
+        id: dang
+        uses: actions/deploy-pages@v4

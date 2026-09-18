@@ -1,0 +1,19 @@
+{
+  "name": "Nhớ Vui — luyện trí nhớ mỗi ngày",
+  "short_name": "Nhớ Vui",
+  "description": "Ứng dụng luyện trí nhớ hằng ngày cho người sa sút trí tuệ, từ mức nhẹ đến nặng.",
+  "lang": "vi",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF4EC",
+  "theme_color": "#FAF4EC",
+  "categories": ["health", "medical", "education"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
