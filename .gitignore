@@ -1,0 +1,19 @@
+# Android
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/.cxx/
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Trình soạn thảo
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/

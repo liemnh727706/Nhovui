@@ -1,0 +1,29 @@
+plugins { id "com.android.application" }
+
+android {
+    namespace "vn.nhovui.app"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "vn.nhovui.app"
+        minSdk 29                 // Android 10 — đủ để dùng MediaStore lưu file Tải về
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation "androidx.webkit:webkit:1.12.1"
+}

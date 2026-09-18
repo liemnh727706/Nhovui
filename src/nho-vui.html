@@ -1,0 +1,2474 @@
+<title>Nhớ Vui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,800;1,400&family=Lora:ital,wght@0,500;1,500&display=swap">
+<style>
+:root{
+  --ground:#FAF4EC; --surface:#FFFFFF; --surface-2:#F3E9DC;
+  --ink:#241E19; --ink-2:#5A4E45; --muted:#8A7A6D;
+  --line:#E4D6C4; --line-strong:#CDB79C;
+  --accent:#C2451D; --accent-ink:#FFFFFF; --accent-soft:#FBE3D8;
+  --gold:#C8860D; --gold-soft:#FBEFD5;
+  --good:#2F7A52; --good-soft:#DFEFE5;
+  --bar:#C2451D;
+  --shadow:0 1px 0 rgba(36,30,25,.06), 0 10px 26px -18px rgba(36,30,25,.55);
+  --r:18px;
+  --body:"Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --serif:"Lora", Georgia, serif;
+  font-size:19px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#16120F; --surface:#221B17; --surface-2:#2C2420;
+    --ink:#F7EEE4; --ink-2:#D5C5B6; --muted:#A08E7F;
+    --line:#3A2F28; --line-strong:#57473C;
+    --accent:#FF8455; --accent-ink:#2A1006; --accent-soft:#3D2018;
+    --gold:#EDB03F; --gold-soft:#372913;
+    --good:#63C68F; --good-soft:#18301F;
+    --bar:#FF8455;
+    --shadow:0 1px 0 rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#16120F; --surface:#221B17; --surface-2:#2C2420;
+  --ink:#F7EEE4; --ink-2:#D5C5B6; --muted:#A08E7F;
+  --line:#3A2F28; --line-strong:#57473C;
+  --accent:#FF8455; --accent-ink:#2A1006; --accent-soft:#3D2018;
+  --gold:#EDB03F; --gold-soft:#372913;
+  --good:#63C68F; --good-soft:#18301F;
+  --bar:#FF8455;
+  --shadow:0 1px 0 rgba(0,0,0,.4), 0 10px 26px -18px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box}
+/* Phải có !important: .rec audio và .rec-row tự đặt display, sẽ đè mất thuộc tính hidden */
+[hidden]{display:none !important}
+img{max-width:100%}
+html,body{height:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:1rem; line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:720px; margin:0 auto; padding-inline:16px; padding-block:0 40px}
+h1,h2,h3{text-wrap:balance; margin:0}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important; transition-duration:.001ms !important}}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:var(--ground); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:10px; padding:10px 16px;
+  max-width:720px; margin:0 auto;
+}
+.brand{display:flex; align-items:center; gap:9px; font-weight:800; font-size:1.05rem; letter-spacing:.01em}
+.brand .mark{
+  width:32px; height:32px; border-radius:11px; display:grid; place-items:center;
+  background:var(--accent); color:var(--accent-ink); font-size:1rem;
+}
+.spacer{flex:1}
+.icon-btn{
+  border:1px solid var(--line-strong); background:var(--surface); border-radius:12px;
+  min-width:46px; height:46px; padding:0 10px; display:inline-flex; align-items:center;
+  justify-content:center; gap:6px; font-size:1.05rem; font-weight:600;
+}
+.icon-btn[aria-pressed="false"]{opacity:.55}
+.icon-btn.small{min-width:40px; height:40px; font-size:.85rem; font-weight:600}
+
+/* ---------- home ---------- */
+.today{
+  margin-top:16px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r); padding:18px 20px; box-shadow:var(--shadow);
+  border-top:5px solid var(--gold);
+}
+.today .hello{color:var(--muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.12em; font-weight:600}
+.today .dow{font-size:2rem; font-weight:800; line-height:1.15; margin-top:4px}
+.today .date{font-size:1.25rem; color:var(--ink-2); margin-top:2px; font-variant-numeric:tabular-nums}
+.today .part{margin-top:10px; display:inline-block; background:var(--gold-soft); color:var(--ink);
+  border-radius:999px; padding:5px 14px; font-weight:600; font-size:.95rem}
+
+.plan{display:flex; align-items:center; gap:18px; margin-top:20px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px}
+.ring{width:84px; height:84px; flex:none}
+.plan .ptxt h2{font-size:1.15rem}
+.plan .ptxt p{margin:4px 0 0; color:var(--ink-2); font-size:.95rem}
+
+.cta{
+  display:block; width:100%; margin-top:18px; border:none; border-radius:16px;
+  background:var(--accent); color:var(--accent-ink); font-size:1.4rem; font-weight:800;
+  padding:20px 16px; box-shadow:var(--shadow); text-align:center;
+}
+.cta.done-state{background:var(--good-soft); color:var(--ink); border:2px solid var(--good)}
+.cta:active{transform:translateY(1px)}
+
+.section-label{margin:26px 0 10px; font-size:.82rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted); font-weight:700}
+
+.tiles{display:grid; gap:10px}
+.tile{
+  display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+  background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+}
+.tile .emo{font-size:1.9rem; width:46px; text-align:center; flex:none}
+.tile .nm{font-weight:600; font-size:1.1rem}
+.tile .sub{font-size:.85rem; color:var(--muted); margin-top:1px}
+.tile .state{margin-left:auto; font-size:1.35rem; color:var(--good); flex:none}
+.tile.is-done{background:var(--good-soft); border-color:var(--good)}
+.tile.is-done .nm{text-decoration:none}
+
+.tipbox{margin-top:26px; border-left:4px solid var(--line-strong); padding:2px 0 2px 14px;
+  color:var(--ink-2); font-size:.92rem}
+.tipbox b{color:var(--ink)}
+
+/* ---------- play ---------- */
+.playhead{display:flex; align-items:center; gap:12px; margin-top:14px}
+.playhead h2{font-size:1.15rem; flex:1}
+.dots{display:flex; gap:5px}
+.dot{width:10px; height:10px; border-radius:50%; background:var(--line-strong)}
+.dot.on{background:var(--accent)}
+
+.stage{margin-top:16px}
+.prompt{font-size:1.45rem; font-weight:700; line-height:1.35; text-wrap:balance}
+.prompt .q{color:var(--accent)}
+.sub-prompt{color:var(--ink-2); margin-top:6px; font-size:1rem}
+
+.cue{
+  margin-top:16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:26px 20px; text-align:center; box-shadow:var(--shadow); min-height:150px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+}
+.cue .big-emo{font-size:5.5rem; line-height:1}
+.cue .proverb{font-family:var(--serif); font-size:1.7rem; line-height:1.5; font-style:italic}
+.cue .blank{color:var(--accent); font-style:normal; font-weight:700; letter-spacing:.05em}
+.cue .avatar{width:150px; height:150px; border-radius:22px; object-fit:cover; border:3px solid var(--line-strong)}
+.cue .avatar-emo{width:150px; height:150px; border-radius:22px; display:grid; place-items:center;
+  font-size:5rem; background:var(--surface-2); border:3px solid var(--line-strong)}
+.cue .note{font-size:.85rem; color:var(--muted); max-width:34ch}
+
+.opts{display:grid; gap:12px; margin-top:16px}
+.opts.two{grid-template-columns:1fr 1fr}
+@media (max-width:420px){.opts.two{grid-template-columns:1fr}}
+.opt{
+  border:2px solid var(--line-strong); background:var(--surface); border-radius:16px;
+  padding:18px 16px; font-size:1.3rem; font-weight:600; text-align:center; min-height:72px;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.opt .oe{font-size:1.9rem}
+.opt.correct{background:var(--good-soft); border-color:var(--good); color:var(--ink)}
+.opt.reveal{border-color:var(--good); border-style:dashed}
+.opt.nope{opacity:.45}
+.opt.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}}
+.opt:disabled{cursor:default}
+
+.fb{margin-top:16px; min-height:64px; display:flex; align-items:center; gap:10px;
+  font-size:1.2rem; font-weight:700; padding:0 2px}
+.fb.good{color:var(--good)}
+.fb.soft{color:var(--gold)}
+
+.nextbtn{
+  display:block; width:100%; margin-top:8px; border:none; border-radius:16px;
+  background:var(--accent); color:var(--accent-ink); font-size:1.25rem; font-weight:800; padding:18px;
+}
+.ghostbtn{
+  display:block; width:100%; margin-top:10px; border:2px solid var(--line-strong);
+  background:transparent; border-radius:16px; font-size:1.1rem; font-weight:600; padding:15px;
+}
+
+/* memory grid */
+.mgrid{display:grid; gap:10px; margin-top:16px}
+.card{
+  aspect-ratio:1/1; border-radius:16px; border:2px solid var(--line-strong); background:var(--surface-2);
+  font-size:min(14vw,3.4rem); display:grid; place-items:center; color:var(--accent);
+}
+.card.up{background:var(--surface); border-color:var(--gold)}
+.card.matched{background:var(--good-soft); border-color:var(--good)}
+
+/* trail */
+.trail{position:relative; margin-top:16px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r); height:min(64vw,360px)}
+.tnum{position:absolute; width:22%; max-width:74px; aspect-ratio:1/1; border-radius:50%;
+  border:2px solid var(--line-strong); background:var(--surface-2); font-size:1.5rem; font-weight:800;
+  display:grid; place-items:center; transform:translate(-50%,-50%)}
+.tnum.hit{background:var(--good-soft); border-color:var(--good); color:var(--good)}
+
+/* breathe / rhythm */
+.pulse-wrap{display:grid; place-items:center; margin-top:20px; height:min(62vw,300px)}
+.pulse{width:min(52vw,220px); aspect-ratio:1/1; border-radius:50%; background:var(--accent-soft);
+  border:4px solid var(--accent); display:grid; place-items:center; font-size:1.25rem; font-weight:700;
+  transition:transform .3s ease}
+.counter{text-align:center; font-size:2.6rem; font-weight:800; font-variant-numeric:tabular-nums; margin-top:6px}
+
+/* reminiscence */
+.recall-note{width:100%; min-height:120px; border-radius:14px; border:2px solid var(--line-strong);
+  background:var(--surface); color:var(--ink); font:inherit; padding:12px; margin-top:12px}
+
+/* ghi âm */
+.rec{margin-top:14px; background:var(--surface); border:2px solid var(--line-strong);
+  border-radius:var(--r); padding:16px}
+.rec-btn{width:100%; border:none; border-radius:14px; padding:18px 14px; font-size:1.2rem;
+  font-weight:800; background:var(--accent); color:var(--accent-ink);
+  display:flex; align-items:center; justify-content:center; gap:10px}
+.rec-btn.on{background:var(--surface-2); color:var(--ink); box-shadow:inset 0 0 0 3px var(--accent)}
+.rec-btn:disabled{opacity:.5}
+.rec-btn.phu{background:transparent; color:var(--ink); box-shadow:inset 0 0 0 2px var(--line-strong);
+  margin-top:10px; font-size:1.1rem}
+.rec-btn.phu.chinh{background:var(--accent); color:var(--accent-ink); box-shadow:none; font-size:1.2rem}
+.rec-link{display:block; width:100%; margin-top:10px; border:none; background:transparent;
+  color:var(--ink-2); font-size:.9rem; font-weight:600; text-decoration:underline; padding:6px}
+.rec-dot{width:15px; height:15px; border-radius:50%; background:var(--accent); flex:none;
+  animation:blink 1.1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.rec-time{font-size:2.1rem; font-weight:800; font-variant-numeric:tabular-nums;
+  text-align:center; margin-top:12px; letter-spacing:.02em}
+.rec-time.idle{color:var(--muted); font-size:1rem; font-weight:600; letter-spacing:0}
+.rec audio{width:100%; margin-top:14px; display:block}
+.rec-row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.rec-row button{flex:1 1 150px; border:2px solid var(--line-strong); background:transparent;
+  border-radius:12px; padding:14px 10px; font-weight:700; font-size:1rem}
+.rec-hint{font-size:.84rem; color:var(--muted); margin-top:12px; line-height:1.45}
+.rec-hint.warn{color:var(--gold); font-weight:600}
+
+/* danh sách ghi âm trong góc người chăm sóc */
+.notes-list audio{width:100%; margin-top:8px}
+.note-acts{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
+.note-acts button{border:1px solid var(--line-strong); background:var(--surface);
+  border-radius:9px; padding:7px 12px; font-size:.84rem; font-weight:600}
+
+/* ---------- caregiver ---------- */
+.care-h{font-size:1.5rem; font-weight:800; margin-top:14px}
+.care-sub{color:var(--ink-2); margin-top:4px; font-size:.95rem}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:16px 18px; margin-top:14px}
+.panel h3{font-size:1.05rem; margin-bottom:4px}
+.panel p.hint{color:var(--muted); font-size:.85rem; margin:2px 0 12px}
+.seg{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+.seg button{border:2px solid var(--line-strong); background:transparent; border-radius:12px;
+  padding:12px 6px; font-weight:600; font-size:.98rem}
+.seg button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips button{border:2px solid var(--line-strong); background:transparent; border-radius:999px;
+  padding:9px 18px; font-weight:600; font-size:.95rem}
+.chips button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.row{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.row + .row{margin-top:12px}
+.field{display:flex; flex-direction:column; gap:5px; flex:1 1 150px}
+.field label{font-size:.82rem; color:var(--muted); font-weight:600}
+.field input{font:inherit; color:inherit; background:var(--surface-2); border:1px solid var(--line-strong);
+  border-radius:10px; padding:11px 12px}
+.people{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:10px; margin-top:12px}
+.person{background:var(--surface-2); border:1px solid var(--line); border-radius:14px; padding:8px; text-align:center}
+.person img,.person .pe{width:100%; aspect-ratio:1/1; border-radius:10px; object-fit:cover; display:block}
+.person .pe{display:grid; place-items:center; font-size:2.2rem; background:var(--surface)}
+.person .pn{font-weight:600; font-size:.88rem; margin-top:6px; overflow-wrap:anywhere}
+.person .pr{font-size:.76rem; color:var(--muted)}
+.person button{margin-top:6px; border:1px solid var(--line-strong); background:transparent;
+  border-radius:8px; font-size:.78rem; padding:4px 8px; width:100%}
+
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:4px}
+.stat{background:var(--surface-2); border-radius:12px; padding:12px}
+.stat .v{font-size:1.6rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1}
+.stat .k{font-size:.78rem; color:var(--muted); margin-top:3px}
+.chartbox{overflow-x:auto; margin-top:14px}
+.notes-list{list-style:none; padding:0; margin:10px 0 0; display:grid; gap:8px}
+.notes-list li{background:var(--surface-2); border-radius:12px; padding:10px 12px; font-size:.95rem}
+.notes-list .nd{font-size:.76rem; color:var(--muted); font-variant-numeric:tabular-nums}
+.backup{width:100%; min-height:90px; border-radius:12px; border:1px solid var(--line-strong);
+  background:var(--surface-2); color:var(--ink-2); font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.72rem; padding:10px; margin-top:10px}
+.guide{font-size:.94rem; color:var(--ink-2)}
+.guide ul{margin:8px 0 0; padding-left:20px; display:grid; gap:7px}
+.guide b{color:var(--ink)}
+
+/* ---------- done ---------- */
+.celebrate{text-align:center; margin-top:28px}
+.celebrate .stars{font-size:3rem; letter-spacing:.1em}
+.celebrate h2{font-size:1.9rem; margin-top:10px}
+.celebrate p{color:var(--ink-2); font-size:1.1rem; margin-top:8px}
+</style>
+
+<header class="topbar">
+  <div class="brand"><span class="mark">🌼</span><span>Nhớ Vui</span></div>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="btnVoice" aria-pressed="true" title="Bật/tắt giọng đọc">🔊</button>
+  <button class="icon-btn" id="btnCare" title="Góc người chăm sóc">👩‍⚕️</button>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="scr-home">
+    <div class="today">
+      <div class="hello" id="hello">Chào buổi sáng</div>
+      <div class="dow" id="dow">Thứ Sáu</div>
+      <div class="date" id="date">Ngày 18 tháng 9 năm 2026</div>
+      <div class="part" id="part">Mùa thu · Buổi sáng</div>
+    </div>
+
+    <div class="plan">
+      <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="12"></circle>
+        <circle id="ringFg" cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" stroke-width="12"
+                stroke-linecap="round" stroke-dasharray="0 999" transform="rotate(-90 50 50)"></circle>
+        <text id="ringTxt" x="50" y="56" text-anchor="middle" font-size="24" font-weight="800"
+              fill="var(--ink)" font-family="Be Vietnam Pro, sans-serif">0/4</text>
+      </svg>
+      <div class="ptxt">
+        <h2>Bài tập hôm nay</h2>
+        <p id="planMsg">Mỗi ngày một chút, nhẹ nhàng thôi.</p>
+      </div>
+    </div>
+
+    <button class="cta" id="btnStart">Bắt đầu</button>
+
+    <div class="section-label">Danh sách bài hôm nay</div>
+    <div class="tiles" id="tiles"></div>
+
+    <div class="tipbox">
+      <b>Gợi ý cho người chăm sóc:</b> ngồi cạnh, đọc to câu hỏi cùng người bệnh,
+      khen ngợi mọi cố gắng và dừng lại khi thấy mệt. 15–20 phút mỗi ngày, vào giờ tỉnh táo nhất
+      (thường là buổi sáng), có hiệu quả hơn một buổi dài. Lần đầu dùng, hãy vào
+      <b>👩‍⚕️ Góc người chăm sóc</b> để chọn mức độ và <b>quê quán</b> — ca dao, món ăn và tên chợ
+      sẽ đổi theo vùng người bệnh lớn lên.
+    </div>
+  </section>
+
+  <!-- ============ PLAY ============ -->
+  <section id="scr-play" hidden>
+    <div class="playhead">
+      <button class="icon-btn small" id="btnExit">← Thoát</button>
+      <h2 id="playName">Bài tập</h2>
+      <div class="dots" id="dots"></div>
+    </div>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <!-- ============ CAREGIVER ============ -->
+  <section id="scr-care" hidden>
+    <button class="icon-btn small" id="btnCareBack">← Về trang chính</button>
+    <h2 class="care-h">Góc người chăm sóc</h2>
+    <p class="care-sub">Cài đặt mức độ, thêm ảnh người thân và theo dõi tiến trình.</p>
+
+    <div class="panel">
+      <h3>Mức độ sa sút trí nhớ</h3>
+      <p class="hint">Chọn theo khả năng hiện tại. Nếu người bệnh sai quá nửa số câu trong vài ngày liền, hãy hạ một mức.</p>
+      <div class="seg" id="segLevel">
+        <button data-lv="nhe" aria-pressed="false">Nhẹ</button>
+        <button data-lv="vua" aria-pressed="true">Trung bình</button>
+        <button data-lv="nang" aria-pressed="false">Nặng</button>
+      </div>
+      <p class="hint" id="levelDesc" style="margin-top:12px"></p>
+    </div>
+
+    <div class="panel">
+      <h3>Quê quán</h3>
+      <p class="hint">Chọn theo nơi người bệnh lớn lên, không phải nơi đang ở. Ca dao, món ăn, tên chợ và câu hỏi hồi tưởng sẽ đổi theo vùng đó — những gì thuộc về tuổi trẻ thường được nhớ rõ nhất.</p>
+      <div class="seg" id="segVung">
+        <button data-vung="bac" aria-pressed="false">Bắc Bộ</button>
+        <button data-vung="trung" aria-pressed="false">Trung Bộ</button>
+        <button data-vung="nam" aria-pressed="true">Nam Bộ</button>
+      </div>
+      <p class="hint" id="vungDesc" style="margin-top:12px"></p>
+      <p class="hint" style="margin-top:14px; color:var(--ink-2); font-weight:600">Tỉnh cụ thể</p>
+      <div class="chips" id="chipTinh"></div>
+      <p class="hint" id="tinhDesc" style="margin-top:12px"></p>
+    </div>
+
+    <div class="panel">
+      <h3>Hiển thị</h3>
+      <p class="hint">Cỡ chữ lớn giúp người cao tuổi đỡ mỏi mắt.</p>
+      <div class="seg" id="segFont">
+        <button data-fs="1" aria-pressed="true">Vừa</button>
+        <button data-fs="1.15" aria-pressed="false">Lớn</button>
+        <button data-fs="1.3" aria-pressed="false">Rất lớn</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Ảnh người thân</h3>
+      <p class="hint">Thêm ít nhất 3 người để bài “Nhớ người thân” dùng ảnh thật. Ảnh chỉ lưu trong máy này.</p>
+      <div class="row">
+        <div class="field"><label for="pName">Tên gọi</label><input id="pName" placeholder="Ví dụ: Hương"></div>
+        <div class="field"><label for="pRel">Quan hệ</label><input id="pRel" placeholder="Ví dụ: con gái"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="pImg">Ảnh khuôn mặt</label><input id="pImg" type="file" accept="image/*"></div>
+        <button class="icon-btn small" id="btnAddPerson" style="align-self:flex-end">Thêm người</button>
+      </div>
+      <div class="people" id="people"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Số bài hoàn thành, 7 ngày gần nhất</h3>
+      <p class="hint">Đều đặn quan trọng hơn điểm số.</p>
+      <div class="stats" id="stats"></div>
+      <div class="chartbox"><svg id="chart" viewBox="0 0 560 240" width="560" height="240" role="img"
+        aria-label="Biểu đồ cột số bài hoàn thành mỗi ngày trong 7 ngày gần nhất"></svg></div>
+    </div>
+
+    <div class="panel">
+      <h3>Nhật ký hồi tưởng</h3>
+      <p class="hint">Những câu chuyện người bệnh kể trong bài “Nhớ chuyện xưa”, kèm bản ghi âm giọng nói.</p>
+      <ul class="notes-list" id="notes"></ul>
+    </div>
+
+    <div class="panel guide">
+      <h3>Vài điều nên nhớ</h3>
+      <ul>
+        <li><b>Không sửa lưng, không tranh cãi.</b> Nếu người bệnh nhớ sai, hãy đi theo câu chuyện của họ rồi nhẹ nhàng chuyển hướng.</li>
+        <li><b>Không tính giờ, không chấm điểm trước mặt.</b> Ứng dụng cố ý không đếm ngược và không báo “Sai”.</li>
+        <li><b>Học không lỗi.</b> Sau hai lần chưa đúng, đáp án tự hiện ra để người bệnh nhắc lại — cách này ghi nhớ tốt hơn là đoán mò.</li>
+        <li><b>Giữ nếp sinh hoạt.</b> Tập cùng một giờ, cùng một chỗ mỗi ngày.</li>
+        <li><b>Ngưng khi mệt.</b> Cáu gắt, lảng tránh, thở dài là dấu hiệu nên dừng và khen ngợi.</li>
+        <li><b>Luyện tập làm chậm sa sút, không chữa khỏi.</b> Vẫn cần khám định kỳ, dùng thuốc theo chỉ định, vận động, ngủ đủ và giao tiếp xã hội.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Kiểm tra micro</h3>
+      <p class="hint">Xem khi bài “Nhớ chuyện xưa” không ghi âm được.</p>
+      <ul class="notes-list" id="micInfo"></ul>
+      <p class="hint" id="micKetQua" style="margin-top:12px"></p>
+      <button class="ghostbtn" id="btnTestMic">Thử mở micro</button>
+    </div>
+
+    <div class="panel">
+      <h3>Sao lưu dữ liệu</h3>
+      <p class="hint">Chép đoạn chữ dưới đây và lưu lại (ví dụ gửi vào tin nhắn của chính mình) để không mất tiến trình khi đổi máy. Các bản ghi âm không nằm trong đoạn này vì quá nặng — hãy bấm “Lưu file” ở từng bản ghi để giữ riêng.</p>
+      <textarea class="backup" id="backup" readonly></textarea>
+      <button class="ghostbtn" id="btnCopy">Chép dữ liệu</button>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* =========================================================
+   1. Dữ liệu bài tập
+   ========================================================= */
+
+const DO_VAT = [
+  {e:"🍚",n:"bát cơm"},{e:"🍌",n:"quả chuối"},{e:"🐓",n:"con gà"},{e:"🌂",n:"cái ô"},
+  {e:"👒",n:"cái nón"},{e:"🥢",n:"đôi đũa"},{e:"🐟",n:"con cá"},{e:"🍵",n:"chén trà"},
+  {e:"🚲",n:"xe đạp"},{e:"🌾",n:"bông lúa"},{e:"🐃",n:"con trâu"},{e:"🥭",n:"quả xoài"},
+  {e:"🍉",n:"quả dưa hấu"},{e:"🔑",n:"chìa khóa"},{e:"👟",n:"đôi giày"},{e:"⏰",n:"đồng hồ"},
+  {e:"📻",n:"cái đài"},{e:"🧹",n:"cái chổi"},{e:"🪑",n:"cái ghế"},{e:"🛏️",n:"cái giường"},
+  {e:"🥥",n:"quả dừa"},{e:"🍜",n:"tô phở"},{e:"🐈",n:"con mèo"},{e:"🐕",n:"con chó"},
+  {e:"🌺",n:"bông hoa"},{e:"🌙",n:"mặt trăng"},{e:"☀️",n:"mặt trời"},{e:"☂️",n:"cây dù"},
+  {e:"🧴",n:"chai dầu"},{e:"📖",n:"quyển sách"}
+];
+
+const NHOM = [
+  {ten:"Con vật", items:[{e:"🐓",n:"con gà"},{e:"🐟",n:"con cá"},{e:"🐃",n:"con trâu"},
+    {e:"🐈",n:"con mèo"},{e:"🐕",n:"con chó"},{e:"🐖",n:"con lợn"},{e:"🦆",n:"con vịt"},{e:"🐦",n:"con chim"}]},
+  {ten:"Trái cây", items:[{e:"🍌",n:"quả chuối"},{e:"🥭",n:"quả xoài"},{e:"🍉",n:"quả dưa hấu"},
+    {e:"🥥",n:"quả dừa"},{e:"🍊",n:"quả cam"},{e:"🍍",n:"quả dứa"},{e:"🍇",n:"chùm nho"},{e:"🍎",n:"quả táo"}]},
+  {ten:"Đồ dùng", items:[{e:"🪑",n:"cái ghế"},{e:"🧹",n:"cái chổi"},{e:"🔑",n:"chìa khóa"},
+    {e:"⏰",n:"đồng hồ"},{e:"🥢",n:"đôi đũa"},{e:"👒",n:"cái nón"},{e:"🌂",n:"cái ô"},{e:"🛏️",n:"cái giường"}]}
+];
+
+/* Ca dao, tục ngữ dùng chung cả nước */
+const CA_DAO_CHUNG = [
+  {t:"Ăn quả nhớ kẻ trồng ___", a:"cây", d:["hoa","rau"]},
+  {t:"Uống nước nhớ ___", a:"nguồn", d:["sông","mưa"]},
+  {t:"Có công mài sắt, có ngày nên ___", a:"kim", d:["dao","đá"]},
+  {t:"Gần mực thì đen, gần đèn thì ___", a:"sáng", d:["tối","nóng"]},
+  {t:"Một cây làm chẳng nên ___", a:"non", d:["rừng","nhà"]},
+  {t:"Lá lành đùm lá ___", a:"rách", d:["vàng","non"]},
+  {t:"Đói cho sạch, rách cho ___", a:"thơm", d:["lành","bền"]},
+  {t:"Không thầy đố mày làm ___", a:"nên", d:["quan","giàu"]},
+  {t:"Thương người như thể thương ___", a:"thân", d:["con","nhà"]},
+  {t:"Ăn cây nào rào cây ___", a:"ấy", d:["kia","to"]},
+  {t:"Cái nết đánh chết cái ___", a:"đẹp", d:["xấu","hay"]},
+  {t:"Con trâu là đầu cơ ___", a:"nghiệp", d:["hàn","may"]},
+  {t:"Đi một ngày đàng, học một sàng ___", a:"khôn", d:["chữ","nghề"]},
+  {t:"Tay làm hàm ___", a:"nhai", d:["cười","no"]},
+  {t:"Công cha như núi Thái ___", a:"Sơn", d:["Bình","Hà"]},
+  {t:"Nghĩa mẹ như nước trong nguồn chảy ___", a:"ra", d:["về","xa"]},
+  {t:"Bầu ơi thương lấy bí cùng, tuy rằng khác giống nhưng chung một ___", a:"giàn", d:["vườn","nhà"]},
+  {t:"Chị ngã em ___", a:"nâng", d:["khóc","chạy"]},
+  {t:"Nhất nước, nhì phân, tam cần, tứ ___", a:"giống", d:["ruộng","mùa"]},
+  {t:"Trăm hay không bằng tay ___", a:"quen", d:["nhanh","khỏe"]}
+];
+
+/* Ca dao theo vùng — trí nhớ xa và bản sắc quê hương được giữ lại rất lâu */
+const CA_DAO_VUNG = {
+  nam:[
+    {t:"Đèn nào cao bằng đèn Châu Đốc / Gió nào độc bằng gió Gò ___", a:"Công", d:["Vấp","Dầu"]},
+    {t:"Nhà Bè nước chảy chia hai / Ai về Gia Định, Đồng Nai thì ___", a:"về", d:["đi","sang"]},
+    {t:"Đồng Nai xứ sở lạ lùng / Dưới sông sấu lội, trên giồng ___ um", a:"cọp", d:["voi","beo"]},
+    {t:"Cần Thơ gạo trắng nước ___", a:"trong", d:["xanh","sâu"]},
+    {t:"Ai về Gia Định thì về / Nước trong gạo trắng dễ bề làm ___", a:"ăn", d:["giàu","quan"]},
+    {t:"Muốn ăn bông súng mắm kho / Thì vô Đồng Tháp ăn cho ___ thèm", a:"đã", d:["no","hết"]},
+    {t:"Bến Tre nước ngọt lắm dừa / Ruộng vườn màu mỡ, biển thừa cá ___", a:"tôm", d:["mòi","cơm"]},
+    {t:"Đồng Tháp Mười cò bay thẳng cánh / Nước Tháp Mười lóng lánh cá ___", a:"tôm", d:["lóc","linh"]},
+    {t:"Gà nào hay bằng gà Cao Lãnh / Gái nào bảnh bằng gái Nha ___", a:"Mân", d:["Trang","Bè"]},
+    {t:"Chèo ghe sợ sấu cắn chưn / Xuống bưng sợ đỉa, lên rừng sợ ___", a:"ma", d:["cọp","voi"]},
+    {t:"Ai ơi về miệt Tháp Mười / Cá tôm sẵn bắt, lúa trời sẵn ___", a:"ăn", d:["gặt","mua"]},
+    {t:"Gió đưa gió đẩy về rẫy ăn còng / Về sông ăn cá, về ___ ăn cua", a:"đồng", d:["bưng","vườn"]},
+    {t:"Chợ Sài Gòn xa, chợ Mỹ cũng xa / Viết thư thăm hết nội nhà, trước thăm phụ mẫu sau là thăm ___", a:"em", d:["anh","con"]},
+    {t:"Bắp non mà nướng lửa lò / Đố ai ve được con đò Thủ ___", a:"Thiêm", d:["Đức","Dầu"]},
+    {t:"Đèn Sài Gòn ngọn xanh ngọn đỏ / Đèn Mỹ Tho ngọn tỏ ngọn lu / Anh về học lấy chữ nhu / Chín trăng em cũng đợi, mười thu em cũng ___", a:"chờ", d:["mong","thương"]}
+  ],
+  trung:[
+    {t:"Đường vô xứ Nghệ quanh quanh / Non xanh nước biếc như tranh họa ___", a:"đồ", d:["hình","bài"]},
+    {t:"Ai vô xứ Huế thì vô / Chớ sợ truông nhà Hồ, sợ phá Tam ___", a:"Giang", d:["Kỳ","Đảo"]},
+    {t:"Đất Quảng Nam chưa mưa đã thấm / Rượu Hồng Đào chưa nhấm đã ___", a:"say", d:["thơm","nồng"]},
+    {t:"Ai về Bình Định mà coi / Con gái Bình Định cầm roi đi ___", a:"quyền", d:["chợ","đường"]},
+    {t:"Ngó lên Hòn Kẽm Đá Dừng / Thương cha nhớ mẹ quá chừng bạn ___", a:"ơi", d:["hiền","xưa"]},
+    {t:"Yến sào Hòn Nội, vịt lội Ninh Hòa / Tôm hùm Bình Ba, nai khô Diên ___", a:"Khánh", d:["Phú","Hòa"]},
+    {t:"Chiều chiều ông Ngự ra câu / Cái ve cái chén cái bầu sau ___", a:"lưng", d:["hè","vai"]},
+    {t:"Quảng Nam hay cãi, Quảng Ngãi hay co / Bình Định hay ___", a:"lo", d:["hò","đo"]},
+    {t:"Học trò xứ Quảng ra thi / Thấy cô gái Huế chân đi không ___", a:"đành", d:["rời","nổi"]},
+    {t:"Núi Truồi ai đắp mà cao / Sông Hương ai bới ai đào mà ___", a:"sâu", d:["dài","trong"]},
+    {t:"Đông Ba, Gia Hội hai cầu / Có chùa Diệu Đế bốn lầu hai ___", a:"chuông", d:["mái","tầng"]},
+    {t:"Ru con con théc cho muồi / Để mẹ đi chợ mua vôi ăn ___", a:"trầu", d:["cơm","cau"]}
+  ],
+  bac:[
+    {t:"Dù ai đi ngược về xuôi / Nhớ ngày giỗ Tổ mùng mười tháng ___", a:"ba", d:["tám","năm"]},
+    {t:"Rủ nhau xem cảnh Kiếm Hồ / Xem cầu Thê Húc, xem chùa Ngọc ___", a:"Sơn", d:["Hà","Bích"]},
+    {t:"Chẳng thơm cũng thể hoa nhài / Dẫu không thanh lịch cũng người Tràng ___", a:"An", d:["Tiền","Thi"]},
+    {t:"Gió đưa cành trúc la đà / Tiếng chuông Trấn Vũ, canh gà Thọ ___", a:"Xương", d:["Xuân","Khương"]},
+    {t:"Ước gì anh lấy được nàng / Để anh mua gạch Bát Tràng về ___", a:"xây", d:["bán","xem"]},
+    {t:"Hỡi cô thắt dải lưng xanh / Có về Nam Định với anh thì ___", a:"về", d:["đi","sang"]},
+    {t:"Sông Tô nước chảy trong ngần / Con thuyền buồm trắng chạy gần chạy ___", a:"xa", d:["nhanh","quanh"]},
+    {t:"Trên trời có đám mây xanh / Ở giữa mây trắng, chung quanh mây ___", a:"vàng", d:["hồng","đen"]},
+    {t:"Làng tôi có lũy tre xanh / Có sông Tô Lịch uốn quanh xóm ___", a:"làng", d:["nhà","thôn"]},
+    {t:"Nhất cao là núi Ba Vì / Nhất lịch nhất sắc kinh kỳ Thăng ___", a:"Long", d:["Bình","Hà"]},
+    {t:"Cốm Vòng, gạo tám Mễ Trì / Tương Bần, húng Láng còn gì ngon ___", a:"hơn", d:["bằng","lành"]},
+    {t:"Đồn rằng chợ Bỏi vui thay / Đằng đông có miếu, đằng tây có ___", a:"chùa", d:["đình","đền"]}
+  ]
+};
+
+/* Đồ vật gần gũi riêng từng miền, trộn thêm vào các bài nhìn hình */
+const DO_VAT_VUNG = {
+  nam:[{e:"🛶",n:"chiếc xuồng"},{e:"🦐",n:"con tôm"},{e:"🐊",n:"con sấu"},
+       {e:"🌴",n:"cây dừa"},{e:"🍧",n:"ly chè"},{e:"🪴",n:"chậu kiểng"}],
+  trung:[{e:"⛵",n:"chiếc thuyền"},{e:"🌶️",n:"trái ớt"},{e:"🧂",n:"hũ muối"},
+       {e:"🪷",n:"bông sen"},{e:"🎑",n:"chiếc nón bài thơ"},{e:"🏯",n:"cửa thành"}],
+  bac:[{e:"🎋",n:"bụi tre"},{e:"🫖",n:"ấm trà"},{e:"🪘",n:"cái trống"},
+       {e:"🌸",n:"cành đào"},{e:"🧺",n:"cái thúng"},{e:"🪵",n:"cây cau"}]
+};
+
+/* Món ăn quê mình — mô tả gợi nhớ, người bệnh chọn tên món */
+const MON_AN = {
+  nam:[
+    {n:"Hủ tiếu", e:"🍜", mo:"Sợi bánh trắng dai, nước lèo trong và ngọt, ăn với tôm, thịt và giá"},
+    {n:"Canh chua cá lóc", e:"🍲", mo:"Nấu với me hoặc trái bần, có bạc hà, đậu bắp, thơm — chua chua ngọt ngọt"},
+    {n:"Cá kho tộ", e:"🥘", mo:"Kho trong cái tộ đất, nước màu sánh đậm, ăn với cơm nóng"},
+    {n:"Bánh xèo", e:"🥞", mo:"Đổ chảo cho thật giòn, vàng ươm, cuốn rau sống chấm nước mắm chua ngọt"},
+    {n:"Bún mắm", e:"🍜", mo:"Nước lèo nấu từ mắm cá linh cá sặc, thơm nồng, ăn với heo quay"},
+    {n:"Lẩu mắm", e:"🍲", mo:"Nồi lẩu thơm mùi mắm, dọn kèm cả rổ rau đồng"},
+    {n:"Bánh tét", e:"🍙", mo:"Gói lá chuối thành đòn dài, nhân đậu mỡ, nấu ăn ngày Tết"},
+    {n:"Cơm tấm", e:"🍚", mo:"Nấu bằng hạt gạo bể, ăn với sườn nướng, bì, chả và mỡ hành"},
+    {n:"Gỏi cuốn", e:"🌯", mo:"Cuốn bánh tráng với tôm thịt, bún và rau, chấm tương đậu phộng"},
+    {n:"Cá lóc nướng trui", e:"🐟", mo:"Xiên que lụi, phủ rơm đốt cháy lớp vỏ, gỡ ra thịt trắng thơm"},
+    {n:"Bánh khọt", e:"🥘", mo:"Đổ trong khuôn tròn nhỏ, trên mặt có con tôm đỏ, ăn kèm rau"},
+    {n:"Chè chuối", e:"🍧", mo:"Chuối nấu nước cốt dừa, béo ngọt, rắc đậu phộng rang", ngot:true},
+    {n:"Bánh da lợn", e:"🍰", mo:"Nhiều lớp xanh vàng chồng lên nhau, dẻo và thơm lá dứa", ngot:true},
+    {n:"Chè bà ba", e:"🍨", mo:"Khoai, bột báng, đậu nấu chung với nước dừa, ngọt béo", ngot:true}
+  ],
+  trung:[
+    {n:"Bún bò Huế", e:"🍜", mo:"Nước dùng thơm sả và ruốc, sợi bún to, có khoanh giò heo"},
+    {n:"Mì Quảng", e:"🍜", mo:"Sợi mì vàng, chan rất ít nước, ăn kèm bánh tráng nướng và đậu phộng"},
+    {n:"Cao lầu", e:"🍲", mo:"Món riêng của phố Hội, sợi dai, có thịt xá xíu và miếng tóp giòn"},
+    {n:"Cơm hến", e:"🍚", mo:"Cơm nguội trộn hến, rau sống và ruốc, ăn cay xé lưỡi"},
+    {n:"Bánh bèo", e:"🥣", mo:"Từng chén nhỏ trắng ngần, trên rắc tôm chấy, chan nước mắm ngọt"},
+    {n:"Bánh nậm", e:"🍃", mo:"Gói lá mỏng và dẹt, nhân tôm thịt, hấp lên ăn nóng"},
+    {n:"Nem lụi", e:"🍢", mo:"Thịt quết nướng trên que sả, cuốn bánh tráng chấm nước tương"},
+    {n:"Bánh canh", e:"🍲", mo:"Sợi bột to tròn, nước lèo sánh, ăn nóng buổi chiều"},
+    {n:"Bánh ít lá gai", e:"🍡", mo:"Đen bóng, dẻo, nhân dừa đậu, gói trong lá chuối", ngot:true},
+    {n:"Chè bắp", e:"🍧", mo:"Nấu từ bắp non trồng ở cồn, ngọt thanh và thơm", ngot:true}
+  ],
+  bac:[
+    {n:"Phở", e:"🍜", mo:"Nước dùng ninh xương thơm quế hồi, bánh phở mềm, ăn buổi sáng"},
+    {n:"Bún chả", e:"🍢", mo:"Thịt nướng than thả trong bát nước chấm chua ngọt, ăn với bún và rau"},
+    {n:"Bún thang", e:"🍜", mo:"Bát bún nhiều màu, có trứng tráng thái chỉ, giò lụa, ruốc tôm bông"},
+    {n:"Bánh cuốn", e:"🥟", mo:"Tráng mỏng trên nồi hơi, cuốn nhân thịt mộc nhĩ, rắc hành phi"},
+    {n:"Chả cá", e:"🐟", mo:"Cá tẩm nghệ nướng rồi rán trên chảo với thì là và hành hoa"},
+    {n:"Bún riêu", e:"🍲", mo:"Nước chua dịu, gạch cua đóng thành tảng, cà chua đỏ nổi trên mặt"},
+    {n:"Xôi xéo", e:"🍚", mo:"Xôi vàng nghệ, đỗ xanh nạo thành sợi, rưới mỡ hành"},
+    {n:"Bánh chưng", e:"🟩", mo:"Gói lá dong vuông vức, nhân đỗ thịt, luộc suốt đêm ngày Tết"},
+    {n:"Canh cua rau đay", e:"🍲", mo:"Nấu ngày hè, gạch cua nổi từng mảng, ăn với cà pháo"},
+    {n:"Cốm", e:"🌾", mo:"Hạt lúa non giã dẹt, xanh và thơm, gói trong lá sen", ngot:true},
+    {n:"Bánh trôi", e:"🍡", mo:"Viên bột trắng tròn nhân đường phên, thả vào nước luộc", ngot:true}
+  ]
+};
+
+/* Chợ quê — trí nhớ về địa danh thường còn rất tốt ở người cao tuổi */
+const CHO = {
+  nam:[
+    {ten:"Chợ Bến Thành", noi:"Sài Gòn"},
+    {ten:"Chợ Bình Tây", noi:"Chợ Lớn"},
+    {ten:"Chợ Bà Chiểu", noi:"Gia Định"},
+    {ten:"Chợ nổi Cái Răng", noi:"Cần Thơ"},
+    {ten:"Chợ nổi Cái Bè", noi:"Tiền Giang"},
+    {ten:"Chợ nổi Ngã Bảy", noi:"Hậu Giang"},
+    {ten:"Chợ Châu Đốc", noi:"An Giang"},
+    {ten:"Chợ Cao Lãnh", noi:"Đồng Tháp"},
+    {ten:"Chợ Rạch Giá", noi:"Kiên Giang"},
+    {ten:"Chợ Vĩnh Long", noi:"Vĩnh Long"}
+  ],
+  trung:[
+    {ten:"Chợ Đông Ba", noi:"Huế"},
+    {ten:"Chợ Hàn", noi:"Đà Nẵng"},
+    {ten:"Chợ Đầm", noi:"Nha Trang"},
+    {ten:"Chợ Vinh", noi:"Nghệ An"},
+    {ten:"Chợ Hội An", noi:"Quảng Nam"},
+    {ten:"Chợ Quy Nhơn", noi:"Bình Định"},
+    {ten:"Chợ Đồng Hới", noi:"Quảng Bình"},
+    {ten:"Chợ Tuy Hòa", noi:"Phú Yên"}
+  ],
+  bac:[
+    {ten:"Chợ Đồng Xuân", noi:"Hà Nội"},
+    {ten:"Chợ Viềng", noi:"Nam Định"},
+    {ten:"Chợ Sắt", noi:"Hải Phòng"},
+    {ten:"Chợ Bắc Hà", noi:"Lào Cai"},
+    {ten:"Chợ tình Khâu Vai", noi:"Hà Giang"},
+    {ten:"Chợ Đồng Đăng", noi:"Lạng Sơn"},
+    {ten:"Chợ Rồng", noi:"Ninh Bình"},
+    {ten:"Chợ Xanh", noi:"Bắc Ninh"}
+  ]
+};
+
+/* ---------------------------------------------------------
+   Gói nội dung riêng từng tỉnh.
+   Tên huyện, tên chợ dùng theo cách gọi quen thuộc ngày trước —
+   đó là những tên người bệnh còn nhớ, dù địa giới nay đã đổi.
+   --------------------------------------------------------- */
+const TINH = {
+  longan:{
+    ten:"Long An", vung:"nam",
+    caDao:[
+      {t:"Gạo Cần Đước, nước Đồng ___", a:"Nai", d:["Tháp","Tranh"]},
+      {t:"Hỏa hồng Nhựt Tảo oanh thiên địa / Kiếm bạt Kiên Giang khấp quỷ ___", a:"thần", d:["thánh","ma"]}
+    ],
+    doVat:[
+      {e:"🦀",n:"con còng"},{e:"🍍",n:"trái khóm"},{e:"🍋",n:"trái chanh"},
+      {e:"🥜",n:"củ đậu phộng"},{e:"🌵",n:"cây thanh long"},{e:"🍶",n:"chai rượu đế"},
+      {e:"🪷",n:"bông súng"}
+    ],
+    monAn:[
+      {n:"Gạo Nàng Thơm Chợ Đào", e:"🍚", mo:"Thứ gạo dẻo trồng ở Chợ Đào, Cần Đước — nấu lên thơm khắp nhà"},
+      {n:"Rượu đế Gò Đen", e:"🍶", mo:"Rượu nếp nấu ở Gò Đen, Bến Lức, trong vắt, có tiếng khắp lục tỉnh"},
+      {n:"Mắm còng Cần Giuộc", e:"🦀", mo:"Con còng bắt ngoài vùng hạ đem làm mắm, để dành ăn với cơm nguội"},
+      {n:"Canh chua cá chốt", e:"🍲", mo:"Cá chốt sông Vàm Cỏ nấu me, thả bạc hà với rau om"},
+      {n:"Lạp xưởng tươi Cần Giuộc", e:"🌭", mo:"Lạp xưởng làm tươi, nướng lên thơm mùi rượu và mỡ"},
+      {n:"Bông súng mắm kho", e:"🪷", mo:"Mùa nước nổi Đồng Tháp Mười, hái cọng bông súng chấm mắm kho"},
+      {n:"Cá lóc nướng trui", e:"🐟", mo:"Xiên que lụi, phủ rơm đốt cháy lớp vỏ, gỡ ra thịt trắng thơm"},
+      {n:"Dưa hấu Long Trì", e:"🍉", mo:"Ruột đỏ au, ngọt nước, trồng ở Long Trì, Châu Thành", ngot:true},
+      {n:"Thanh long Châu Thành", e:"🌵", mo:"Trái vỏ đỏ ruột trắng, mọc trên cây giống cây xương rồng", ngot:true},
+      {n:"Khóm Bến Lức", e:"🍍", mo:"Trái khóm vàng ươm, chua ngọt, vùng Bến Lức trồng bạt ngàn", ngot:true},
+      {n:"Nước chanh Bến Lức", e:"🍋", mo:"Chanh trồng đầy Bến Lức, vắt ra pha đường uống cho mát", ngot:true},
+      {n:"Đậu phộng Đức Hòa", e:"🥜", mo:"Trồng trên đất giồng Đức Hòa, rang muối ăn chơi hoặc nấu xôi"}
+    ],
+    cho:[
+      {ten:"Chợ Đào", noi:"Cần Đước"},
+      {ten:"Chợ Gò Đen", noi:"Bến Lức"},
+      {ten:"Chợ Tầm Vu", noi:"Châu Thành"},
+      {ten:"Chợ Rạch Kiến", noi:"Cần Đước"},
+      {ten:"Chợ Hậu Nghĩa", noi:"Đức Hòa"},
+      {ten:"Chợ Tân An", noi:"Tân An"},
+      {ten:"Chợ Mộc Hóa", noi:"Mộc Hóa"},
+      {ten:"Chợ Cần Giuộc", noi:"Cần Giuộc"},
+      {ten:"Chợ Thủ Thừa", noi:"Thủ Thừa"},
+      {ten:"Chợ Kiến Tường", noi:"Kiến Tường"}
+    ],
+    que:[
+      {q:"Con sông nào chảy ngang thành phố Tân An?", a:"Vàm Cỏ Tây", d:["Vàm Cỏ Đông","Sông Tiền","Sông Hậu"]},
+      {q:"Ngày trước, tỉnh lỵ của Long An đặt ở đâu?", a:"Tân An", d:["Bến Lức","Cần Giuộc","Mộc Hóa"]},
+      {q:"Nhà Trăm Cột nổi tiếng nằm ở vùng nào?", a:"Cần Đước", d:["Đức Hòa","Thủ Thừa","Vĩnh Hưng"]},
+      {q:"Chùa Tôn Thạnh, nơi cụ Nguyễn Đình Chiểu từng ở, thuộc vùng nào?", a:"Cần Giuộc", d:["Tân Trụ","Bến Lức","Châu Thành"]},
+      {q:"Ông Nguyễn Trung Trực đốt tàu giặc trên sông ở đâu?", a:"Vàm Nhựt Tảo", d:["Vàm Cỏ Đông","Rạch Kiến","Gò Đen"]},
+      {q:"Gạo Nàng Thơm nổi tiếng của chợ nào?", a:"Chợ Đào", d:["Chợ Tầm Vu","Chợ Gò Đen","Chợ Mộc Hóa"]},
+      {q:"Rượu đế ngon có tiếng của Long An nấu ở đâu?", a:"Gò Đen", d:["Long Trì","Rạch Kiến","Hậu Nghĩa"]},
+      {q:"Dưa hấu ngọt nổi tiếng trồng ở đâu?", a:"Long Trì", d:["Gò Đen","Tân Trụ","Đức Huệ"]},
+      {q:"Đậu phộng trồng nhiều ở vùng nào?", a:"Đức Hòa", d:["Cần Giuộc","Tân Hưng","Thủ Thừa"]},
+      {q:"Chanh và khóm trồng bạt ngàn ở vùng nào?", a:"Bến Lức", d:["Cần Đước","Vĩnh Hưng","Châu Thành"]},
+      {q:"Vùng trũng ngập nước phía trên của tỉnh gọi là gì?", a:"Đồng Tháp Mười", d:["Đồng Nai","Tứ giác Long Xuyên","Cù lao Phố"]},
+      {q:"Long An giáp với thành phố lớn nào?", a:"Sài Gòn", d:["Cần Thơ","Mỹ Tho","Biên Hòa"]},
+      {q:"Mắm còng là món để dành của vùng nào?", a:"Cần Giuộc", d:["Đức Huệ","Tân Thạnh","Mộc Hóa"]},
+      {q:"Khu bảo tồn Láng Sen nằm ở vùng nào?", a:"Tân Hưng", d:["Cần Đước","Bến Lức","Châu Thành"]},
+      {q:"Thanh long trồng nhiều nhất ở vùng nào?", a:"Châu Thành", d:["Đức Huệ","Cần Giuộc","Thủ Thừa"]},
+      {q:"Hai con sông Vàm Cỏ tên là gì?", a:"Vàm Cỏ Đông và Vàm Cỏ Tây",
+       d:["Vàm Cỏ Nam và Vàm Cỏ Bắc","Sông Tiền và sông Hậu","Sông Bảo Định và Rạch Cát"]}
+    ],
+    hoiTuong:[
+      "Hồi đó nhà mình ở gần sông Vàm Cỏ Đông hay Vàm Cỏ Tây?",
+      "Mùa nước nổi trên Đồng Tháp Mười, nhà mình hay bắt cá gì?",
+      "Đi chợ Tân An hồi trước là đi đò hay đi xe lam?",
+      "Ruộng nhà mình cấy lúa mùa nào, gặt vào tháng mấy?",
+      "Tết ở quê mình có nấu rượu, gói bánh tét không? Ai gói?",
+      "Hồi trẻ mình lên Sài Gòn có hay không, đi bằng đường nào?",
+      "Nhà mình trồng lúa, trồng chanh hay trồng thanh long?",
+      "Ban đêm nằm nghe tiếng ghe chạy trên sông, mình còn nhớ không?"
+    ]
+  }
+};
+
+const HOI_TUONG_VUNG = {
+  nam:[
+    "Hồi đó đi chợ bằng xuồng hay đi bộ? Chợ họp ở đâu?",
+    "Mùa nước nổi nhà mình hay bắt con gì, làm món gì ăn?",
+    "Tết nhà mình gói bánh tét, ai là người gói khéo nhất?",
+    "Vườn nhà mình ngày xưa trồng cây trái gì?",
+    "Có nhớ tiếng rao bán hàng nào hồi nhỏ không?",
+    "Đám giỗ ở quê mình thường nấu những món gì?",
+    "Hồi trẻ mình hay nghe cải lương hay nghe vọng cổ của ai?"
+  ],
+  trung:[
+    "Mùa mưa bão ở quê mình hồi đó ra sao, cả nhà làm gì?",
+    "Ngày xưa đi học có phải qua đò, qua truông không?",
+    "Nhà mình hay đi chợ nào, mua những gì?",
+    "Tết quê mình thường làm bánh gì?",
+    "Ruộng nhà mình ở đâu, mỗi năm mấy vụ?",
+    "Hồi trẻ mình có đi hò, đi hát bài chòi không?"
+  ],
+  bac:[
+    "Tết nhà mình gói bánh chưng, luộc mấy đêm, ai thức trông nồi?",
+    "Ngày mùa gặt lúa ở làng mình thế nào?",
+    "Hội làng mình mở vào ngày nào, có trò gì vui?",
+    "Cây đa, giếng nước, sân đình ở làng mình nằm chỗ nào?",
+    "Mùa đông ngày xưa rét lắm không, nhà mình sưởi bằng gì?",
+    "Hồi nhỏ mình có đi xem chèo, xem quan họ không?"
+  ]
+};
+
+const HOI_TUONG = [
+  "Hồi còn nhỏ, món ăn nào ngon nhất trong trí nhớ của mình?",
+  "Tết ngày xưa ở nhà mình thường chuẩn bị những gì?",
+  "Ngôi trường đầu tiên mình học tên là gì, ở đâu?",
+  "Ngày trước mình làm nghề gì? Công việc ấy thế nào?",
+  "Mình gặp người bạn đời của mình trong dịp nào?",
+  "Chiếc xe đầu tiên của mình là xe gì?",
+  "Xóm cũ ngày xưa có những ai, có gì vui?",
+  "Mẹ mình hay nấu món gì cho cả nhà?",
+  "Ngày cưới của mình hôm ấy ra sao?",
+  "Mình còn nhớ bài hát nào từ thời trẻ?",
+  "Kỷ niệm nào với các con hồi chúng còn bé mình nhớ nhất?",
+  "Chợ quê ngày xưa họp ở đâu, bán những gì?"
+];
+
+const HOI_TUONG_EMO = ["🏮","🌾","🏫","🚲","💐","🍲","🎶","👨‍👩‍👧","🧧","🛖","🌸","⛵"];
+
+const MENH_GIA = [1000,2000,5000,10000,20000,50000];
+
+const KHEN = ["Giỏi quá!","Chính xác!","Tuyệt vời!","Đúng rồi!","Hay lắm!","Nhớ tốt lắm!"];
+const AN_UI = ["Chưa đúng, mình thử lại nhé.","Không sao đâu, thử lại nào.","Gần rồi, thử thêm lần nữa nhé."];
+
+/* =========================================================
+   2. Trạng thái & lưu trữ
+   ========================================================= */
+
+const KEY = "nhovui.v1";
+const DEFAULT = {level:"vua", vung:"nam", tinh:"", voice:true, fontScale:1, people:[], log:[], notes:[], day:"", done:[]};
+let S = Object.assign({}, DEFAULT);
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) S = Object.assign({}, DEFAULT, JSON.parse(raw));
+  }catch(e){ /* trình duyệt chặn lưu trữ — vẫn chạy bình thường */ }
+  if(S.day !== todayKey()){ S.day = todayKey(); S.done = []; }
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+}
+function todayKey(d){
+  const x = d || new Date();
+  return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0");
+}
+
+/* =========================================================
+   3. Tiện ích
+   ========================================================= */
+
+const $ = s => document.querySelector(s);
+const el = (tag, cls, txt) => { const n=document.createElement(tag); if(cls)n.className=cls; if(txt!=null)n.textContent=txt; return n; };
+const pick = a => a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]];} return b; }
+function sample(a,n){ return shuffle(a).slice(0,n); }
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function seededShuffle(arr, seedStr){
+  let h=2166136261; for(let i=0;i<seedStr.length;i++){h^=seedStr.charCodeAt(i); h=Math.imul(h,16777619);}
+  const rnd = mulberry32(h); const b=arr.slice();
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1)); [b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
+function money(v){ return v.toLocaleString("vi-VN") + " đ"; }
+
+/* Kho nội dung: gói tỉnh (nếu có) → vùng miền → dùng chung */
+function goiTinh(){ return (S.tinh && TINH[S.tinh]) ? TINH[S.tinh] : null; }
+
+/* gộp danh sách đồ vật, bỏ trùng cả tên lẫn hình để câu hỏi không nhập nhằng */
+function dvPool(){
+  const all = DO_VAT.concat(DO_VAT_VUNG[S.vung] || [], (goiTinh() && goiTinh().doVat) || []);
+  const ten = new Set(), hinh = new Set(), out = [];
+  all.forEach(x=>{
+    if(ten.has(x.n) || hinh.has(x.e)) return;
+    ten.add(x.n); hinh.add(x.e); out.push(x);
+  });
+  return out;
+}
+function monAn(){
+  const t = goiTinh();
+  if(t && t.monAn && t.monAn.length >= 6) return t.monAn;
+  return MON_AN[S.vung] || MON_AN.nam;
+}
+function choPool(){
+  const t = goiTinh();
+  if(t && t.cho && t.cho.length >= 4) return t.cho;
+  return CHO[S.vung] || CHO.nam;
+}
+function queList(){ const t = goiTinh(); return (t && t.que) || []; }
+/* ca dao: ưu tiên câu của tỉnh, rồi vùng miền, rồi câu dùng chung */
+function caDaoPool(n){
+  const t = goiTinh();
+  const tinh = shuffle((t && t.caDao) || []);
+  const vung = shuffle(CA_DAO_VUNG[S.vung] || []);
+  const chung = shuffle(CA_DAO_CHUNG);
+  const ra = tinh.slice(0, Math.min(tinh.length, Math.floor(n/3)));
+  const soVung = Math.min(vung.length, Math.ceil((n - ra.length)*0.7));
+  return shuffle(ra.concat(vung.slice(0, soVung), chung).slice(0, n));
+}
+function hoiTuongPool(){
+  const t = goiTinh();
+  return ((t && t.hoiTuong) || []).concat(HOI_TUONG_VUNG[S.vung] || [], HOI_TUONG);
+}
+
+let voices = [];
+function refreshVoices(){ try{ voices = window.speechSynthesis.getVoices()||[]; }catch(e){} }
+function say(text){
+  if(!S.voice || !text) return;
+  try{
+    const sp = window.speechSynthesis; if(!sp) return;
+    sp.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/_+/g," chấm chấm chấm "));
+    u.lang = "vi-VN"; u.rate = 0.85; u.pitch = 1;
+    const v = voices.find(x=>x.lang && x.lang.toLowerCase().indexOf("vi")===0);
+    if(v) u.voice = v;
+    sp.speak(u);
+  }catch(e){}
+}
+try{ window.speechSynthesis.onvoiceschanged = refreshVoices; refreshVoices(); }catch(e){}
+
+/* =========================================================
+   3b. Ghi âm: kho lưu trong máy, chuyển mã mp3, lưu ra file
+   ========================================================= */
+
+/* Bản ghi là dữ liệu nhị phân nên để trong IndexedDB, không phải localStorage */
+const DB_AM = "nhovui-am";
+function moKho(){
+  return new Promise((res, rej)=>{
+    try{
+      const r = indexedDB.open(DB_AM, 1);
+      r.onupgradeneeded = ()=>{ if(!r.result.objectStoreNames.contains("am")) r.result.createObjectStore("am"); };
+      r.onsuccess = ()=> res(r.result);
+      r.onerror  = ()=> rej(r.error);
+    }catch(e){ rej(e); }
+  });
+}
+function thaoTacKho(che, fn){
+  return moKho().then(db => new Promise((res, rej)=>{
+    const tx = db.transaction("am", che);
+    const rq = fn(tx.objectStore("am"));
+    tx.oncomplete = ()=> res(rq && rq.result);
+    tx.onerror = ()=> rej(tx.error);
+  }));
+}
+const amLuu = (id, blob)=> thaoTacKho("readwrite", st=> st.put(blob, id));
+const amDoc = (id)=>       thaoTacKho("readonly",  st=> st.get(id));
+const amXoa = (id)=>       thaoTacKho("readwrite", st=> st.delete(id));
+
+/* Trình duyệt ghi ra webm hoặc mp4 — chuyển sang mp3 để điện thoại nào cũng mở được */
+async function sangMp3(blob){
+  if(!window.lamejs) return null;
+  let ctx = null;
+  try{
+    const ab = await blob.arrayBuffer();
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const buf = await ctx.decodeAudioData(ab);
+    const pcm = buf.getChannelData(0);
+    const i16 = new Int16Array(pcm.length);
+    for(let i=0;i<pcm.length;i++){
+      const s = Math.max(-1, Math.min(1, pcm[i]));
+      i16[i] = s < 0 ? s*0x8000 : s*0x7FFF;
+    }
+    const enc = new lamejs.Mp3Encoder(1, buf.sampleRate, 64);
+    const phan = [];
+    const KHOI = 1152;
+    for(let i=0;i<i16.length;i+=KHOI){
+      const d = enc.encodeBuffer(i16.subarray(i, i+KHOI));
+      if(d.length) phan.push(new Uint8Array(d));
+    }
+    const cuoi = enc.flush();
+    if(cuoi.length) phan.push(new Uint8Array(cuoi));
+    return new Blob(phan, {type:"audio/mpeg"});
+  }catch(e){
+    return null;
+  }finally{
+    if(ctx) try{ ctx.close(); }catch(e){}
+  }
+}
+
+function duoiTu(mime){
+  if(!mime) return "webm";
+  if(mime.indexOf("mpeg") >= 0) return "mp3";
+  if(mime.indexOf("mp4") >= 0 || mime.indexOf("aac") >= 0) return "m4a";
+  if(mime.indexOf("ogg") >= 0) return "ogg";
+  return "webm";
+}
+function tenFile(ngay, ext){
+  return "NhoVui_" + (ngay || todayKey()) + "_" + String(Date.now()).slice(-4) + "." + ext;
+}
+/* Hai đường lưu file:
+   - Mở bằng file trên máy hoặc web riêng: tải thẳng, ra đúng .mp3
+   - Trong khung xem của Claude: phải đi qua cửa lưu file của nền tảng,
+     nơi đuôi .mp3 chưa được nhận, nên lùi về đúng định dạng máy vừa ghi. */
+let cuaLuu;
+async function layCuaLuu(){
+  if(cuaLuu !== undefined) return cuaLuu;
+  try{ cuaLuu = (window.claude && window.claude.use) ? await window.claude.use("downloads") : null; }
+  catch(e){ cuaLuu = null; }
+  return cuaLuu;
+}
+function duoiThayThe(ext){ return ext === "m4a" ? "mp4" : (ext === "ogg" ? "webm" : ext); }
+
+function blobSangBase64(blob){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=> res(String(fr.result).split(",")[1] || "");
+    fr.onerror = rej;
+    fr.readAsDataURL(blob);
+  });
+}
+
+async function luuAmThanh(blobGoc, extGoc, ngay, bao){
+  bao("Đang chuyển thành mp3…");
+  const mp3 = await sangMp3(blobGoc);
+
+  /* Chạy trong ứng dụng Android: ghi thẳng vào thư mục Tải về của máy */
+  if(window.NhoVuiAndroid && window.NhoVuiAndroid.luuTep){
+    try{
+      const b64 = await blobSangBase64(mp3 || blobGoc);
+      const ok = window.NhoVuiAndroid.luuTep(
+        b64,
+        tenFile(ngay, mp3 ? "mp3" : extGoc),
+        mp3 ? "audio/mpeg" : (blobGoc.type || "audio/mp4"));
+      return bao(ok ? "Đã lưu vào thư mục Tải về ✓" : "Không lưu được vào máy");
+    }catch(e){ return bao("Không lưu được vào máy"); }
+  }
+
+  const cua = await layCuaLuu();
+
+  if(!cua){
+    const ok = taiVe(mp3 || blobGoc, tenFile(ngay, mp3 ? "mp3" : extGoc));
+    return bao(ok ? "Đã lưu vào thư mục tải về ✓" : "Trình duyệt chặn tải file");
+  }
+  if(mp3){
+    try{
+      await cua.save({filename: tenFile(ngay, "mp3"), data: mp3});
+      return bao("Đã lưu file .mp3 ✓");
+    }catch(e){
+      const ma = e && e.code;
+      if(ma === "declined")     return bao("Đã hủy lưu");
+      if(ma === "rate_limited") return bao("Đang có một cửa sổ lưu khác, thử lại sau");
+      if(ma !== "rejected_extension") return bao("Chỗ này chưa lưu file được");
+    }
+  }
+  const ext = duoiThayThe(extGoc);
+  try{
+    await cua.save({filename: tenFile(ngay, ext), data: blobGoc});
+    bao("Đã lưu file ." + ext + " ✓");
+  }catch(e){
+    bao(e && e.code === "declined" ? "Đã hủy lưu" : "Chỗ này chưa lưu file được");
+  }
+}
+
+function taiVe(blob, ten){
+  try{
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = ten;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 5000);
+    return true;
+  }catch(e){ return false; }
+}
+/* --- Vì sao micro không mở được: trả lời cụ thể, không hướng dẫn chung chung ---
+   Chrome trên Android chặn micro với trang mở từ file:// và chặn im lặng —
+   không hề hiện cửa sổ hỏi quyền. Phải nói đúng điều đó cho người dùng. */
+function trongKhungNhung(){
+  try{ return window.top !== window.self; }catch(e){ return true; }
+}
+/* Hỏi thẳng trình duyệt: khung chứa trang này có được phép dùng micro không.
+   true = khung chặn, false = khung cho phép, null = trình duyệt không trả lời. */
+function khungChanMicro(){
+  try{
+    const cs = document.featurePolicy || document.permissionsPolicy;
+    if(cs && typeof cs.allowsFeature === "function") return !cs.allowsFeature("microphone");
+  }catch(e){}
+  return null;
+}
+
+const LOI_KHUNG =
+  "Ứng dụng đang chạy trong một khung nhúng không được cấp quyền micro, nên trình duyệt " +
+  "báo “bị chặn” mà không hiện cửa sổ hỏi. Cài đặt của Chrome không sửa được việc này — " +
+  "khóa nằm ở khung chứa, không nằm ở máy.";
+
+/* Micro của trình duyệt bị khóa không có nghĩa là hết đường ghi âm */
+const GOI_Y_MAY = " Cách khác: trong bài “Nhớ chuyện xưa”, bấm nút “Ghi bằng ứng dụng của máy” — " +
+  "điện thoại sẽ mở ứng dụng ghi âm sẵn có, ghi xong tệp tự quay về ứng dụng.";
+
+/* Quyền bị chặn: nguyên nhân khác hẳn nhau tùy trang có nằm trong khung hay không */
+function loiBiChan(){ return trongKhungNhung() ? LOI_KHUNG : LOI_BI_CHAN; }
+
+function canTroMicro(){
+  if(location.protocol === "file:") return {ma:"file", loi:
+    "Micro của trình duyệt không dùng được khi mở trang thẳng từ file trong máy: Chrome trên " +
+    "Android khóa sẵn và không hiện cửa sổ hỏi quyền. Đây là quy định của trình duyệt, " +
+    "không phải lỗi ứng dụng."};
+  if(!window.isSecureContext) return {ma:"http", loi:
+    "Trang đang mở bằng http thường nên trình duyệt khóa micro."};
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder)
+    return {ma:"cu", loi:
+    "Trình duyệt này chưa có chức năng ghi âm. Hãy mở bằng Chrome hoặc Firefox bản mới."};
+  if(khungChanMicro() === true) return {ma:"khung", loi: LOI_KHUNG};
+  return null;
+}
+
+const LOI_BI_CHAN =
+  "Quyền micro đang bị chặn cho trang này. Trên Chrome: bấm biểu tượng ổ khóa cạnh " +
+  "thanh địa chỉ → Quyền → Micro → Cho phép, rồi tải lại trang.";
+
+async function trangThaiQuyenMicro(){
+  try{
+    if(!navigator.permissions || !navigator.permissions.query) return "khongro";
+    const r = await navigator.permissions.query({name:"microphone"});
+    return r.state;
+  }catch(e){ return "khongro"; }
+}
+
+async function giaiThichLoiMicro(e){
+  const can = canTroMicro();
+  if(can) return can.loi;
+  const ten = (e && e.name) || "";
+  if(ten === "NotFoundError" || ten === "DevicesNotFoundError")
+    return "Không tìm thấy micro nào trên máy này.";
+  if(ten === "NotReadableError" || ten === "TrackStartError")
+    return "Micro đang bị thứ khác chiếm (cuộc gọi, ứng dụng ghi âm). Đóng ứng dụng đó rồi thử lại.";
+  if(ten === "NotAllowedError" || ten === "SecurityError"){
+    const tt = await trangThaiQuyenMicro();
+    if(tt === "denied") return loiBiChan();
+    if(trongKhungNhung()) return LOI_KHUNG;
+    return "Cửa sổ xin quyền đã bị bỏ qua hoặc bị chặn. Bấm lại và chọn “Cho phép”.";
+  }
+  return "Chưa mở được micro" + (ten ? " (" + ten + ")" : "") + ".";
+}
+
+/* Đường vòng khi trình duyệt khóa micro: để chính ứng dụng ghi âm của máy làm việc,
+   rồi nhận tệp về qua thẻ chọn tệp. Thẻ này không đòi quyền micro, chạy được cả trên file:// */
+const DUOI_QUEN = ["mp3","m4a","aac","wav","ogg","opus","webm","mp4","3gp","amr","flac"];
+function duoiTuTen(ten){
+  const d = String(ten || "").split(".").pop().toLowerCase();
+  return DUOI_QUEN.indexOf(d) >= 0 ? d : "";
+}
+function doDaiAmThanh(blob){
+  return new Promise(res=>{
+    try{
+      const a = document.createElement("audio");
+      const url = URL.createObjectURL(blob);
+      let xong = false;
+      const tra = v=>{ if(xong) return; xong = true; URL.revokeObjectURL(url); res(v); };
+      a.preload = "metadata";
+      a.onloadedmetadata = ()=> tra(isFinite(a.duration) ? Math.round(a.duration) : 0);
+      a.onerror = ()=> tra(0);
+      setTimeout(()=> tra(0), 4000);
+      a.src = url;
+    }catch(e){ res(0); }
+  });
+}
+
+function dongHo(giay){
+  const p = Math.floor(giay/60), g = giay%60;
+  return p + ":" + String(g).padStart(2,"0");
+}
+
+/* =========================================================
+   4. Định hướng thời gian
+   ========================================================= */
+
+const THU = ["Chủ nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"];
+function buoi(h){ return h<11?"Buổi sáng":h<13?"Buổi trưa":h<18?"Buổi chiều":"Buổi tối"; }
+function chao(h){ return h<11?"Chào buổi sáng":h<13?"Chào buổi trưa":h<18?"Chào buổi chiều":"Chào buổi tối"; }
+function mua(m){ m+=1; return (m>=2&&m<=4)?"Mùa xuân":(m>=5&&m<=7)?"Mùa hè":(m>=8&&m<=10)?"Mùa thu":"Mùa đông"; }
+
+/* =========================================================
+   5. Bộ máy hỏi – đáp (học không lỗi)
+   ========================================================= */
+
+let aborted = false;
+let mayGhiHienTai = null;   /* bộ ghi âm đang mở, để tắt micro khi thoát bài */
+const stage = $("#stage");
+
+/* q = {prompt, sub, cue(node), options:[{label, emo, ok}], speak} */
+function ask(q){
+  return new Promise(resolve=>{
+    stage.innerHTML = "";
+    const p = el("div","prompt"); p.innerHTML = q.prompt; stage.appendChild(p);
+    if(q.sub) stage.appendChild(el("div","sub-prompt", q.sub));
+    if(q.cue) stage.appendChild(q.cue);
+
+    const opts = shuffle(q.options);
+    const box = el("div","opts" + (opts.length<=4 && opts.every(o=>(o.label||"").length<=14) ? " two":""));
+    stage.appendChild(box);
+    const fb = el("div","fb"); stage.appendChild(fb);
+
+    const listen = el("button","ghostbtn"); listen.textContent = "🔊 Nghe lại câu hỏi";
+    listen.onclick = ()=> say(q.speak || p.textContent);
+    stage.appendChild(listen);
+
+    let wrong = 0, firstTry = true, settled = false;
+    const buttons = [];
+
+    function finish(ok){
+      if(settled) return; settled = true;
+      buttons.forEach(b=>b.disabled = true);
+      listen.remove();
+      const nx = el("button","nextbtn","Câu tiếp theo →");
+      nx.onclick = ()=> resolve(ok);
+      stage.appendChild(nx);
+      nx.focus({preventScroll:true});
+    }
+
+    opts.forEach(o=>{
+      const b = el("button","opt");
+      if(o.emo){ const s=el("span","oe",o.emo); b.appendChild(s); }
+      b.appendChild(el("span",null,o.label));
+      b.onclick = ()=>{
+        if(settled) return;
+        if(o.ok){
+          b.classList.add("correct");
+          buttons.forEach(x=>{ if(x!==b) x.classList.add("nope"); });
+          const kh = pick(KHEN);
+          fb.className = "fb good"; fb.textContent = "✓ " + kh;
+          say(kh);
+          finish(firstTry);
+        }else{
+          firstTry = false; wrong++;
+          b.classList.add("shake");
+          setTimeout(()=>b.classList.remove("shake"),420);
+          if(wrong >= 2){
+            b.classList.add("nope"); b.disabled = true;
+            const right = buttons.find(x=>x.dataset.ok === "1");
+            right.classList.add("reveal");
+            fb.className = "fb soft";
+            fb.textContent = "Đáp án là: " + right.dataset.label + ". Mình cùng đọc to lại nhé.";
+            say("Đáp án là " + right.dataset.label);
+          }else{
+            const au = pick(AN_UI);
+            fb.className = "fb soft"; fb.textContent = "↻ " + au;
+            say(au);
+          }
+        }
+      };
+      b.dataset.ok = o.ok ? "1" : "0";
+      b.dataset.label = o.label;
+      box.appendChild(b); buttons.push(b);
+    });
+
+    if(q.speak !== false) setTimeout(()=> say(q.speak || p.textContent), 350);
+  });
+}
+
+function cueEmo(emoji){ const c=el("div","cue"); c.appendChild(el("div","big-emo",emoji)); return c; }
+function cueText(html, note){
+  const c = el("div","cue"); const t = el("div","proverb"); t.innerHTML = html; c.appendChild(t);
+  if(note) c.appendChild(el("div","note",note));
+  return c;
+}
+
+/* =========================================================
+   6. Các bài tập
+   ========================================================= */
+
+const ROUNDS = {nhe:6, vua:4, nang:3};
+const NOPT   = {nhe:4, vua:3, nang:2};
+
+/* --- 6.1 Hôm nay là ngày gì (định hướng thực tại) --- */
+async function mDinhHuong(lv){
+  const now = new Date();
+  let c = 0, t = 0;
+
+  stage.innerHTML = "";
+  const card = el("div","cue");
+  card.appendChild(el("div","proverb", THU[now.getDay()] + ", ngày " + now.getDate() +
+    " tháng " + (now.getMonth()+1) + " năm " + now.getFullYear()));
+  card.appendChild(el("div",null, mua(now.getMonth()) + " · " + buoi(now.getHours())));
+  stage.appendChild(el("div","prompt","Mình cùng đọc to dòng này nhé"));
+  stage.appendChild(card);
+  const go = el("button","nextbtn","Tôi đã đọc xong →");
+  stage.appendChild(go);
+  say("Hôm nay là " + THU[now.getDay()] + ", ngày " + now.getDate() + " tháng " + (now.getMonth()+1));
+  await new Promise(r=> go.onclick = r);
+  if(aborted) return null;
+
+  const qs = [];
+  qs.push({
+    prompt:'Hôm nay là <span class="q">thứ mấy</span>?',
+    options: buildOpts(THU[now.getDay()], shuffle(THU.filter(x=>x!==THU[now.getDay()])).slice(0,NOPT[lv]-1))
+  });
+  qs.push({
+    prompt:'Bây giờ là <span class="q">buổi nào</span>?',
+    options: buildOpts(buoi(now.getHours()),
+      shuffle(["Buổi sáng","Buổi trưa","Buổi chiều","Buổi tối"].filter(x=>x!==buoi(now.getHours()))).slice(0,NOPT[lv]-1))
+  });
+  if(lv !== "nang"){
+    const m = now.getMonth()+1;
+    qs.push({
+      prompt:'Bây giờ đang là <span class="q">tháng mấy</span>?',
+      options: buildOpts("Tháng "+m, shuffle([1,2,3,4,5,6,7,8,9,10,11,12].filter(x=>x!==m)).slice(0,NOPT[lv]-1).map(x=>"Tháng "+x))
+    });
+    qs.push({
+      prompt:'Bây giờ là <span class="q">mùa nào</span>?',
+      options: buildOpts(mua(now.getMonth()),
+        shuffle(["Mùa xuân","Mùa hè","Mùa thu","Mùa đông"].filter(x=>x!==mua(now.getMonth()))).slice(0,NOPT[lv]-1))
+    });
+  }
+  for(const q of qs){
+    setDots(qs.length, t);
+    const ok = await ask(q); if(aborted) return null;
+    t++; if(ok) c++;
+  }
+  return {c, t};
+}
+function buildOpts(right, wrongs){
+  return [{label:right, ok:true}].concat(wrongs.map(w=>({label:w, ok:false})));
+}
+
+/* --- 6.2 Lật thẻ tìm đôi --- */
+function mLatThe(lv){
+  return new Promise(resolve=>{
+    const pairs = lv==="nang"?2 : lv==="vua"?3 : 6;
+    const cols  = lv==="nang"?2 : lv==="vua"?3 : 4;
+    const items = sample(dvPool(), pairs);
+    const deck  = shuffle(items.concat(items));
+
+    stage.innerHTML = "";
+    stage.appendChild(el("div","prompt","Tìm hai hình giống nhau"));
+    stage.appendChild(el("div","sub-prompt","Chạm vào một ô để mở. Mở được đúng đôi thì ô sẽ sáng xanh."));
+    const grid = el("div","mgrid");
+    grid.style.gridTemplateColumns = "repeat("+cols+",1fr)";
+    stage.appendChild(grid);
+    const fb = el("div","fb"); stage.appendChild(fb);
+    say("Tìm hai hình giống nhau");
+
+    let open = [], found = 0, tries = 0, lock = false;
+    setDots(pairs, 0);
+
+    deck.forEach(it=>{
+      const c = el("button","card","🌼");
+      c.onclick = ()=>{
+        if(lock || c.classList.contains("up") || c.classList.contains("matched")) return;
+        c.classList.add("up"); c.textContent = it.e;
+        open.push({c, it});
+        if(open.length === 2){
+          lock = true; tries++;
+          if(open[0].it.n === open[1].it.n){
+            setTimeout(()=>{
+              open.forEach(o=>{o.c.classList.remove("up"); o.c.classList.add("matched");});
+              found++; setDots(pairs, found);
+              const kh = pick(KHEN);
+              fb.className="fb good"; fb.textContent = "✓ " + kh + " Đây là " + open[0].it.n + ".";
+              say(kh + " " + open[0].it.n);
+              open = []; lock = false;
+              if(found === pairs){
+                setTimeout(()=> resolve({c:pairs, t:Math.max(tries,pairs)}), 700);
+              }
+            }, 420);
+          }else{
+            fb.className="fb soft"; fb.textContent = "↻ Hai hình chưa giống nhau, mình nhớ chỗ rồi thử tiếp nhé.";
+            setTimeout(()=>{
+              open.forEach(o=>{o.c.classList.remove("up"); o.c.textContent="🌼";});
+              open = []; lock = false;
+            }, 1100);
+          }
+        }
+      };
+      grid.appendChild(c);
+    });
+  });
+}
+
+/* --- 6.3 Nhớ đồ vật (ghi nhớ ngắn hạn) --- */
+async function mNhoDoVat(lv){
+  const n = lv==="nang"?2 : lv==="vua"?3 : 5;
+  const pool = dvPool();
+  const targets = sample(pool, n);
+  const rest = pool.filter(x=>!targets.includes(x));
+
+  stage.innerHTML = "";
+  stage.appendChild(el("div","prompt","Hãy nhìn kỹ và đọc to tên những món này"));
+  stage.appendChild(el("div","sub-prompt","Lát nữa mình sẽ hỏi lại. Không vội, xem bao lâu cũng được."));
+  const c = el("div","cue");
+  const row = el("div"); row.style.display="flex"; row.style.flexWrap="wrap";
+  row.style.justifyContent="center"; row.style.gap="18px";
+  targets.forEach(x=>{
+    const b = el("div"); b.style.textAlign="center";
+    b.appendChild(el("div","big-emo", x.e));
+    b.appendChild(el("div",null, x.n));
+    row.appendChild(b);
+  });
+  c.appendChild(row); stage.appendChild(c);
+  const go = el("button","nextbtn","Tôi nhớ rồi →"); stage.appendChild(go);
+  say("Hãy nhìn kỹ và đọc to tên những món này. " + targets.map(x=>x.n).join(", "));
+  await new Promise(r=> go.onclick = r);
+  if(aborted) return null;
+
+  let ok = 0, t = 0;
+  for(let i=0;i<targets.length;i++){
+    setDots(targets.length, i);
+    const wrongs = sample(rest, NOPT[lv]-1);
+    const res = await ask({
+      prompt: "Món nào vừa xuất hiện?",
+      sub: "Câu " + (i+1) + " trong " + targets.length,
+      options: [{label:targets[i].n, emo:targets[i].e, ok:true}]
+        .concat(wrongs.map(w=>({label:w.n, emo:w.e, ok:false}))),
+      speak: "Món nào vừa xuất hiện?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.4 Nhớ người thân --- */
+async function mNguoiThan(lv){
+  let people = S.people;
+  let demo = false;
+  if(people.length < 2){
+    demo = true;
+    people = [
+      {name:"Hương", rel:"con gái", emo:"👩"},
+      {name:"Minh", rel:"con trai", emo:"👨"},
+      {name:"Bống", rel:"cháu nội", emo:"👧"},
+      {name:"Thành", rel:"cháu ngoại", emo:"👦"}
+    ];
+  }
+  const rounds = Math.min(ROUNDS[lv], people.length * 2);
+  const nopt = Math.min(NOPT[lv], people.length);
+  let ok = 0, t = 0;
+
+  for(let i=0;i<rounds;i++){
+    setDots(rounds, i);
+    const target = people[i % people.length];
+    const others = sample(people.filter(p=>p.name !== target.name), nopt-1);
+    const cue = el("div","cue");
+    if(target.img){
+      const im = document.createElement("img");
+      im.className = "avatar"; im.src = target.img; im.alt = "Ảnh người thân";
+      cue.appendChild(im);
+    }else{
+      cue.appendChild(el("div","avatar-emo", target.emo || "🧓"));
+    }
+    if(demo) cue.appendChild(el("div","note",
+      "Đây là ví dụ. Người chăm sóc có thể thêm ảnh thật ở Góc người chăm sóc."));
+    const res = await ask({
+      prompt:'Đây là <span class="q">ai</span>?',
+      sub: target.rel ? "Gợi ý: là " + target.rel + " của mình" : "",
+      cue,
+      options: [{label:target.name, ok:true}].concat(others.map(p=>({label:p.name, ok:false}))),
+      speak:"Đây là ai?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.5 Đố ca dao, tục ngữ --- */
+async function mCaDao(lv){
+  const n = ROUNDS[lv];
+  const qs = caDaoPool(n);
+  const kho = CA_DAO_CHUNG.concat(CA_DAO_VUNG[S.vung] || []);
+  let ok = 0, t = 0;
+  for(let i=0;i<qs.length;i++){
+    setDots(n, i);
+    const q = qs[i];
+    const wrongs = q.d.slice(0, NOPT[lv]-1);
+    /* mức Nhẹ cần 4 lựa chọn — mượn thêm chữ từ các câu khác */
+    while(wrongs.length < NOPT[lv]-1){
+      const w = pick(kho).a;
+      if(w !== q.a && wrongs.indexOf(w) < 0) wrongs.push(w);
+    }
+    const res = await ask({
+      prompt:"Thiếu chữ gì ở cuối câu?",
+      cue: cueText(q.t.replace("___", '<span class="blank">…</span>').replace(/ \/ /g, "<br>")),
+      options:[{label:q.a, ok:true}].concat(wrongs.map(w=>({label:w, ok:false}))),
+      speak: q.t.replace("___","").replace(/ \/ /g, ", ") + " thiếu chữ gì?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.6 Gọi tên đồ vật --- */
+async function mGoiTen(lv){
+  const n = ROUNDS[lv];
+  const pool = dvPool();
+  const items = sample(pool, n);
+  const rest = pool.filter(x=>!items.includes(x));
+  let ok = 0, t = 0;
+  for(let i=0;i<items.length;i++){
+    setDots(n, i);
+    const wrongs = sample(rest, NOPT[lv]-1);
+    const res = await ask({
+      prompt:"Đây là cái gì?",
+      cue: cueEmo(items[i].e),
+      options:[{label:items[i].n, ok:true}].concat(wrongs.map(w=>({label:w.n, ok:false}))),
+      speak:"Đây là cái gì?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.6b Món ăn quê mình --- */
+async function mMonAn(lv){
+  const pool = monAn();
+  const n = ROUNDS[lv];
+  let ok = 0, t = 0;
+
+  if(lv === "nang"){
+    /* mức nặng: chỉ phân biệt món mặn – món ngọt, hai lựa chọn */
+    const qs = sample(pool, n);
+    for(let i=0;i<qs.length;i++){
+      setDots(n, i);
+      const m = qs[i];
+      const cue = el("div","cue");
+      cue.appendChild(el("div","big-emo", m.e));
+      cue.appendChild(el("div","proverb", m.n));
+      const res = await ask({
+        prompt:"Món này là món mặn hay món ngọt?",
+        cue,
+        options:[{label: m.ngot ? "Món ngọt":"Món mặn", ok:true},
+                 {label: m.ngot ? "Món mặn":"Món ngọt", ok:false}],
+        speak: m.n + " là món mặn hay món ngọt?"
+      });
+      if(aborted) return null;
+      t++; if(res) ok++;
+    }
+    return {c:ok, t};
+  }
+
+  const qs = sample(pool, n);
+  for(let i=0;i<qs.length;i++){
+    setDots(n, i);
+    const m = qs[i];
+    const wrongs = sample(pool.filter(x=>x.n !== m.n), NOPT[lv]-1);
+    const cue = el("div","cue");
+    cue.appendChild(el("div","big-emo", m.e));
+    cue.appendChild(el("div","proverb", "“" + m.mo + "”"));
+    const res = await ask({
+      prompt:"Đó là món gì?",
+      cue,
+      options:[{label:m.n, ok:true}].concat(wrongs.map(w=>({label:w.n, ok:false}))),
+      speak: m.mo + ". Đó là món gì?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.6c Chợ quê mình --- */
+async function mChoQue(lv){
+  const pool = choPool();
+  const n = Math.min(ROUNDS[lv], pool.length);
+  const qs = sample(pool, n);
+  let ok = 0, t = 0;
+  for(let i=0;i<qs.length;i++){
+    setDots(n, i);
+    const c = qs[i];
+    const khac = [];
+    shuffle(pool).forEach(x=>{
+      if(x.noi !== c.noi && khac.indexOf(x.noi) < 0 && khac.length < NOPT[lv]-1) khac.push(x.noi);
+    });
+    const cue = el("div","cue");
+    cue.appendChild(el("div","big-emo","🏪"));
+    cue.appendChild(el("div","proverb", c.ten));
+    const res = await ask({
+      prompt:'Chợ này ở <span class="q">đâu</span>?',
+      cue,
+      options:[{label:c.noi, ok:true}].concat(khac.map(x=>({label:x, ok:false}))),
+      speak: c.ten + " ở đâu?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.6d Quê mình (địa danh, đặc sản của tỉnh) --- */
+async function mQueHuong(lv){
+  const pool = queList();
+  if(!pool.length) return {c:1, t:1};
+  const n = Math.min(ROUNDS[lv], pool.length);
+  const qs = sample(pool, n);
+  const ten = (goiTinh() && goiTinh().ten) || "quê mình";
+  let ok = 0, t = 0;
+  for(let i=0;i<qs.length;i++){
+    setDots(n, i);
+    const q = qs[i];
+    const cue = el("div","cue");
+    cue.appendChild(el("div","big-emo","🧭"));
+    cue.appendChild(el("div","proverb", q.q));
+    cue.appendChild(el("div","note", "Chuyện quê " + ten));
+    const res = await ask({
+      prompt:"Mình còn nhớ không?",
+      cue,
+      options:[{label:q.a, ok:true}].concat(q.d.slice(0, NOPT[lv]-1).map(w=>({label:w, ok:false}))),
+      speak: q.q
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.7 Phân loại --- */
+async function mPhanLoai(lv){
+  const n = ROUNDS[lv];
+  let ok = 0, t = 0;
+  const all = [];
+  NHOM.forEach(g=> g.items.forEach(it=> all.push({it, g:g.ten})));
+  const qs = sample(all, n);
+  for(let i=0;i<qs.length;i++){
+    setDots(n, i);
+    const q = qs[i];
+    const wrongs = NHOM.map(g=>g.ten).filter(x=>x!==q.g).slice(0, NOPT[lv]-1);
+    const res = await ask({
+      prompt: "<span class=\"q\">" + q.it.n + "</span> thuộc nhóm nào?",
+      cue: cueEmo(q.it.e),
+      options:[{label:q.g, ok:true}].concat(wrongs.map(w=>({label:w, ok:false}))),
+      speak: q.it.n + " thuộc nhóm nào?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.8 Đếm tiền đi chợ --- */
+async function mDemTien(lv){
+  const n = lv==="nhe"?5:4;
+  const soTo = lv==="nhe"?3:2;
+  let ok = 0, t = 0;
+  for(let i=0;i<n;i++){
+    setDots(n, i);
+    const notes = [];
+    for(let k=0;k<soTo;k++) notes.push(pick(MENH_GIA));
+    const tong = notes.reduce((a,b)=>a+b,0);
+    const cue = el("div","cue");
+    const row = el("div"); row.style.display="flex"; row.style.flexWrap="wrap";
+    row.style.justifyContent="center"; row.style.gap="10px";
+    notes.forEach(v=>{
+      const b = el("div", null, money(v));
+      b.style.cssText = "background:var(--gold-soft); border:2px solid var(--gold); border-radius:10px;"+
+        "padding:16px 14px; font-weight:800; font-size:1.15rem; font-variant-numeric:tabular-nums";
+      row.appendChild(b);
+    });
+    cue.appendChild(row); cue.appendChild(el("div","note","Tờ tiền Việt Nam"));
+    const wrongSet = new Set();
+    while(wrongSet.size < NOPT[lv]-1){
+      const delta = pick([1000,2000,5000,10000,20000,-1000,-5000,-10000]);
+      const v = tong + delta;
+      if(v > 0 && v !== tong) wrongSet.add(v);
+    }
+    const res = await ask({
+      prompt:"Tất cả là bao nhiêu tiền?",
+      cue,
+      options:[{label:money(tong), ok:true}].concat([...wrongSet].map(v=>({label:money(v), ok:false}))),
+      speak:"Tất cả là bao nhiêu tiền?"
+    });
+    if(aborted) return null;
+    t++; if(res) ok++;
+  }
+  return {c:ok, t};
+}
+
+/* --- 6.9 Tìm số theo thứ tự (chú ý) --- */
+function mTimSo(lv){
+  return new Promise(resolve=>{
+    const n = lv==="nhe"?7:5;
+    stage.innerHTML = "";
+    stage.appendChild(el("div","prompt","Chạm các số theo thứ tự từ 1"));
+    stage.appendChild(el("div","sub-prompt","Từ 1 đến " + n + ". Cứ từ từ, không tính giờ."));
+    const box = el("div","trail"); stage.appendChild(box);
+    const fb = el("div","fb"); stage.appendChild(fb);
+    say("Chạm các số theo thứ tự, bắt đầu từ số 1");
+
+    const cells = shuffle([
+      [22,20],[50,16],[78,22],[20,48],[50,50],[80,50],[24,78],[52,82],[78,78]
+    ]).slice(0, n);
+    let next = 1, miss = 0;
+    setDots(n, 0);
+
+    for(let i=1;i<=n;i++){
+      const b = el("button","tnum", String(i));
+      b.style.left = cells[i-1][0] + "%";
+      b.style.top  = cells[i-1][1] + "%";
+      b.onclick = ()=>{
+        if(b.classList.contains("hit")) return;
+        if(i === next){
+          b.classList.add("hit"); next++;
+          setDots(n, next-1);
+          fb.className="fb good"; fb.textContent = "✓ Đúng rồi, tiếp số " + (next<=n?next:"") ;
+          if(next > n){
+            fb.textContent = "✓ " + pick(KHEN);
+            say(pick(KHEN));
+            setTimeout(()=> resolve({c:n, t:n+miss}), 700);
+          }
+        }else{
+          miss++;
+          b.classList.add("shake"); setTimeout(()=>b.classList.remove("shake"),420);
+          fb.className="fb soft"; fb.textContent = "↻ Mình đang tìm số " + next + " nhé.";
+          if(miss % 2 === 0) say("Mình đang tìm số " + next);
+        }
+      };
+      box.appendChild(b);
+    }
+  });
+}
+
+/* --- 6.10a Bộ ghi âm dùng trong bài hồi tưởng --- */
+const TOI_DA_GIAY = 300;   /* ghi tối đa 5 phút một lần */
+
+function boGhiAm(){
+  const wrap = el("div","rec");
+  const nut  = el("button","rec-btn");
+  const nhan = el("span",null,"Bắt đầu ghi âm");
+  nut.appendChild(el("span",null,"🎙️")); nut.appendChild(nhan);
+  wrap.appendChild(nut);
+
+  /* Nhờ ứng dụng ghi âm của máy — chạy được cả khi trình duyệt khóa micro */
+  const nhap = document.createElement("input");
+  nhap.type = "file"; nhap.accept = "audio/*"; nhap.hidden = true;
+  wrap.appendChild(nhap);
+
+  const nutMay = el("button","rec-btn phu");
+  nutMay.appendChild(el("span",null,"📱"));
+  nutMay.appendChild(el("span",null,"Ghi bằng ứng dụng của máy"));
+  wrap.appendChild(nutMay);
+
+  const nutChon = el("button","rec-link","Hoặc chọn một tệp ghi âm có sẵn");
+  wrap.appendChild(nutChon);
+
+  const dong = el("div","rec-time idle","Chưa ghi âm");
+  wrap.appendChild(dong);
+
+  const nghe = document.createElement("audio");
+  nghe.controls = true; nghe.hidden = true; nghe.preload = "metadata";
+  wrap.appendChild(nghe);
+
+  const hang = el("div","rec-row"); hang.hidden = true;
+  const nutLuu = el("button",null,"⬇️ Lưu file .mp3 vào máy");
+  const nutXoa = el("button",null,"🗑 Bỏ bản ghi này");
+  hang.appendChild(nutLuu); hang.appendChild(nutXoa);
+  wrap.appendChild(hang);
+
+  const goi = el("div","rec-hint",
+    "Bản ghi lưu ngay trong máy này, nghe lại được bất cứ lúc nào ở Góc người chăm sóc. " +
+    "Bấm “Lưu file” để chép thành file âm thanh mở được bằng trình phát nhạc của điện thoại. " +
+    "Ghi tối đa 5 phút mỗi lần.");
+  wrap.appendChild(goi);
+
+  let may = null, luong = null, manh = [], dem = 0, nhip = null;
+  let blobGoc = null, extGoc = "webm", giayGhi = 0, huy = false;
+
+  /* biết trước là không ghi âm được thì nói ngay, đừng để bấm rồi mới hỏng */
+  const canBanDau = canTroMicro();
+  if(canBanDau){
+    /* trình duyệt khóa micro — vẫn ghi âm được, chỉ là nhờ ứng dụng của máy làm hộ */
+    nut.disabled = true;
+    nut.hidden = true;
+    nutMay.classList.add("chinh");
+    goi.className = "rec-hint warn";
+    goi.textContent = canBanDau.loi + " Nhưng vẫn ghi âm được: bấm nút trên để máy mở ứng dụng " +
+      "ghi âm sẵn có, ghi xong bấm lưu thì tệp tự quay về đây.";
+    dong.textContent = "Ghi bằng ứng dụng của máy";
+  }else{
+    /* quyền đã bị chặn từ trước thì cửa sổ hỏi sẽ không hiện ra nữa — báo trước */
+    trangThaiQuyenMicro().then(tt=>{
+      if(tt === "denied" && !blobGoc){
+        nut.hidden = true;
+        nutMay.classList.add("chinh");
+        dong.textContent = "Ghi bằng ứng dụng của máy";
+        goi.className = "rec-hint warn";
+        goi.textContent = loiBiChan() + " Vẫn ghi âm được: bấm nút trên để máy mở ứng dụng " +
+          "ghi âm sẵn có, ghi xong bấm lưu thì tệp tự quay về đây.";
+      }
+    });
+  }
+
+  function dungLuong(){
+    if(luong){ luong.getTracks().forEach(t=>t.stop()); luong = null; }
+  }
+  function datNhan(txt, dangGhi){
+    nhan.textContent = txt;
+    nut.classList.toggle("on", !!dangGhi);
+    nut.firstChild.textContent = dangGhi ? "" : "🎙️";
+    nut.firstChild.className = dangGhi ? "rec-dot" : "";
+  }
+
+  async function batDau(){
+    const can = canTroMicro();
+    if(can){
+      goi.className = "rec-hint warn";
+      goi.textContent = can.loi;
+      nut.disabled = true; return;
+    }
+    nhan.textContent = "Đang xin quyền micro…";
+    try{
+      luong = await navigator.mediaDevices.getUserMedia({audio:true});
+    }catch(e){
+      datNhan("Thử lại ghi âm", false);
+      nutMay.classList.add("chinh");
+      goi.className = "rec-hint warn";
+      goi.textContent = (await giaiThichLoiMicro(e)) +
+        " Vẫn ghi âm được bằng nút “Ghi bằng ứng dụng của máy” bên trên.";
+      return;
+    }
+    manh = []; blobGoc = null; dem = 0;
+    try{ may = new MediaRecorder(luong); }
+    catch(e){ try{ may = new MediaRecorder(luong, {mimeType:"audio/webm"}); }catch(e2){ dungLuong(); return; } }
+    extGoc = duoiTu(may.mimeType);
+
+    may.ondataavailable = ev=>{ if(ev.data && ev.data.size) manh.push(ev.data); };
+    may.onstop = async ()=>{
+      clearInterval(nhip); nhip = null;
+      dungLuong();
+      giayGhi = dem;
+      if(huy || !manh.length){ datNhan("Bắt đầu ghi âm", false); dong.className="rec-time idle"; dong.textContent="Chưa ghi âm"; return; }
+      blobGoc = new Blob(manh, {type: may.mimeType || "audio/webm"});
+      datNhan("Ghi lại từ đầu", false);
+      dong.className = "rec-time idle";
+      dong.textContent = "Đã ghi " + dongHo(giayGhi) + " · bấm ▶ để nghe lại";
+      nghe.src = URL.createObjectURL(blobGoc);
+      nghe.hidden = false; hang.hidden = false;
+      say("Đã ghi xong. Mình cùng nghe lại nhé.");
+    };
+
+    huy = false;
+    may.start();
+    datNhan("Dừng lại", true);
+    dong.className = "rec-time"; dong.textContent = "0:00";
+    nghe.hidden = true; hang.hidden = true;
+    nhip = setInterval(()=>{
+      dem++; dong.textContent = dongHo(dem);
+      if(dem >= TOI_DA_GIAY) dungGhi();
+    }, 1000);
+  }
+
+  function dungGhi(){
+    if(may && may.state === "recording"){ try{ may.stop(); }catch(e){} }
+  }
+
+  nut.onclick = ()=>{
+    if(may && may.state === "recording") dungGhi();
+    else batDau();
+  };
+  function moChonTep(ghiMoi){
+    if(ghiMoi) nhap.setAttribute("capture","microphone");
+    else nhap.removeAttribute("capture");
+    nhap.value = "";
+    nhap.click();
+  }
+  nutMay.onclick = ()=> moChonTep(true);
+  nutChon.onclick = ()=> moChonTep(false);
+
+  nhap.onchange = async ()=>{
+    const f = nhap.files && nhap.files[0];
+    if(!f || !f.size) return;
+    dong.className = "rec-time idle";
+    dong.textContent = "Đang mở tệp…";
+    blobGoc = f;
+    extGoc = duoiTuTen(f.name) || duoiTu(f.type);
+    giayGhi = await doDaiAmThanh(f);
+    nghe.src = URL.createObjectURL(f);
+    nghe.hidden = false; hang.hidden = false;
+    dong.textContent = "Đã nhận bản ghi" + (giayGhi ? " · " + dongHo(giayGhi) : "") + " · bấm ▶ để nghe lại";
+    goi.className = "rec-hint";
+    goi.textContent = "Bản ghi đã nằm trong ứng dụng. Bấm “Xong bài này” để lưu vào nhật ký, " +
+      "hoặc “Lưu file” để chép thêm một bản ra máy.";
+    datNhan(nut.disabled ? "Bắt đầu ghi âm" : "Ghi lại từ đầu", false);
+    say("Đã nhận bản ghi. Mình cùng nghe lại nhé.");
+  };
+
+  nutXoa.onclick = ()=>{
+    blobGoc = null; giayGhi = 0;
+    nghe.removeAttribute("src"); nghe.hidden = true; hang.hidden = true;
+    dong.className = "rec-time idle"; dong.textContent = "Chưa ghi âm";
+    datNhan("Bắt đầu ghi âm", false);
+  };
+  nutLuu.onclick = async ()=>{
+    if(!blobGoc) return;
+    nutLuu.disabled = true;
+    await luuAmThanh(blobGoc, extGoc, todayKey(), txt => nutLuu.textContent = txt);
+    setTimeout(()=>{ nutLuu.textContent = "⬇️ Lưu file .mp3 vào máy"; nutLuu.disabled = false; }, 2800);
+  };
+
+  return {
+    node: wrap,
+    banGhi: ()=> blobGoc ? {blob:blobGoc, ext:extGoc, giay:giayGhi} : null,
+    dungHan: ()=>{ huy = true; dungGhi(); clearInterval(nhip); dungLuong(); }
+  };
+}
+
+/* --- 6.10 Nhớ chuyện xưa (hồi tưởng) --- */
+function mHoiTuong(){
+  return new Promise(resolve=>{
+    const pool = hoiTuongPool();
+    const i = Math.floor(Math.random()*pool.length);
+    stage.innerHTML = "";
+    stage.appendChild(el("div","prompt","Mình cùng nhớ lại chuyện ngày xưa"));
+    stage.appendChild(el("div","sub-prompt","Bài này không có đúng hay sai. Kể bao nhiêu cũng quý."));
+    const c = el("div","cue");
+    c.appendChild(el("div","big-emo", HOI_TUONG_EMO[i % HOI_TUONG_EMO.length]));
+    c.appendChild(el("div","proverb", pool[i]));
+    stage.appendChild(c);
+    say(pool[i]);
+
+    const may = boGhiAm();
+    mayGhiHienTai = may;
+    stage.appendChild(el("div","sub-prompt","Bật ghi âm để giữ lại chính giọng kể — nghe lại sau này quý hơn chữ viết."));
+    stage.appendChild(may.node);
+
+    stage.appendChild(el("div","sub-prompt","Người chăm sóc có thể ghi thêm vài ý bằng chữ:"));
+    const ta = el("textarea","recall-note");
+    ta.placeholder = "Ví dụ: kể về gánh hàng rong đầu ngõ, nhớ rất rõ tên bà bán bún…";
+    stage.appendChild(ta);
+
+    const done = el("button","nextbtn","Xong bài này →");
+    done.onclick = async ()=>{
+      done.disabled = true;
+      const v = ta.value.trim();
+      const bg = may.banGhi();
+      if(v || bg){
+        const ghi = {d:todayKey(), q:pool[i], t:v};
+        if(bg){
+          const id = "am" + Date.now();
+          try{
+            await amLuu(id, bg.blob);
+            ghi.am = id; ghi.ext = bg.ext; ghi.giay = bg.giay;
+          }catch(e){ /* máy không cho lưu thì vẫn giữ phần chữ */ }
+        }
+        S.notes.unshift(ghi);
+        S.notes = S.notes.slice(0,60);
+        save();
+      }
+      may.dungHan();
+      mayGhiHienTai = null;
+      resolve({c:1, t:1});
+    };
+    stage.appendChild(done);
+  });
+}
+
+/* --- 6.11 Hít thở & vỗ nhịp --- */
+function mThuGian(){
+  return new Promise(resolve=>{
+    stage.innerHTML = "";
+    stage.appendChild(el("div","prompt","Hít thở chậm cùng vòng tròn"));
+    stage.appendChild(el("div","sub-prompt","Vòng tròn nở ra thì hít vào bằng mũi, thu lại thì thở ra bằng miệng. Làm 4 nhịp."));
+    const wrap = el("div","pulse-wrap");
+    const p = el("div","pulse","Chuẩn bị");
+    wrap.appendChild(p); stage.appendChild(wrap);
+    const cnt = el("div","counter","4 nhịp"); stage.appendChild(cnt);
+    const skip = el("button","ghostbtn","Bỏ qua bài này"); stage.appendChild(skip);
+
+    let cycles = 4, stop = false;
+    skip.onclick = ()=>{ stop = true; resolve({c:1,t:1}); };
+
+    (async function run(){
+      await sleep(600);
+      for(let i=0;i<4 && !stop && !aborted;i++){
+        cnt.textContent = "Nhịp " + (i+1) + " / 4";
+        p.textContent = "Hít vào…"; p.style.transform = "scale(1.28)";
+        say("Hít vào"); await sleep(4000); if(stop||aborted) return;
+        p.textContent = "Giữ…"; say("Giữ"); await sleep(1800); if(stop||aborted) return;
+        p.textContent = "Thở ra…"; p.style.transform = "scale(0.82)";
+        say("Thở ra"); await sleep(5000); if(stop||aborted) return;
+        p.style.transform = "scale(1)"; await sleep(500);
+      }
+      if(stop || aborted) return;
+      p.textContent = "Xong rồi 🌼"; cnt.textContent = "Nhẹ người chưa?";
+      say("Xong rồi, giỏi lắm");
+      skip.remove();
+      const nx = el("button","nextbtn","Tiếp tục →");
+      nx.onclick = ()=> resolve({c:1,t:1});
+      stage.appendChild(nx);
+    })();
+  });
+}
+
+/* --- 6.12 Vỗ tay theo nhịp (vận động + chú ý) --- */
+function mVoNhip(lv){
+  return new Promise(resolve=>{
+    const target = lv==="nang"?10 : lv==="vua"?16 : 24;
+    stage.innerHTML = "";
+    stage.appendChild(el("div","prompt","Vỗ tay theo nhịp"));
+    stage.appendChild(el("div","sub-prompt","Mỗi lần vòng tròn sáng lên thì vỗ tay một cái, rồi chạm vào vòng tròn. Đủ " + target + " nhịp là xong."));
+    const wrap = el("div","pulse-wrap");
+    const p = el("button","pulse","Chạm khi sáng");
+    wrap.appendChild(p); stage.appendChild(wrap);
+    const cnt = el("div","counter","0 / " + target); stage.appendChild(cnt);
+    const fb = el("div","fb"); stage.appendChild(fb);
+
+    let n = 0, lit = false, timer = null, stop = false;
+    say("Vỗ tay theo nhịp");
+
+    function beat(){
+      if(stop || aborted) return;
+      lit = true; p.style.transform = "scale(1.18)";
+      p.style.background = "var(--gold-soft)";
+      setTimeout(()=>{ lit = false; p.style.transform="scale(1)"; p.style.background="var(--accent-soft)"; }, 620);
+      timer = setTimeout(beat, 1400);
+    }
+    timer = setTimeout(beat, 900);
+
+    p.onclick = ()=>{
+      if(stop) return;
+      n++;
+      cnt.textContent = n + " / " + target;
+      fb.className = "fb " + (lit ? "good":"soft");
+      fb.textContent = lit ? "✓ Đúng nhịp!" : "↻ Hơi lệch nhịp, không sao cả.";
+      if(n >= target){
+        stop = true; clearTimeout(timer);
+        p.style.transform="scale(1)";
+        fb.className="fb good"; fb.textContent = "✓ " + pick(KHEN);
+        say(pick(KHEN));
+        const nx = el("button","nextbtn","Tiếp tục →");
+        nx.onclick = ()=> resolve({c:1,t:1});
+        stage.appendChild(nx);
+      }
+    };
+  });
+}
+
+/* =========================================================
+   7. Danh mục bài tập
+   ========================================================= */
+
+const MODULES = [
+  {id:"dinhhuong", ten:"Hôm nay là ngày gì", emo:"📅", mo:"Định hướng ngày tháng", lv:["nhe","vua","nang"], run:mDinhHuong},
+  {id:"latthe",    ten:"Lật thẻ tìm đôi",    emo:"🃏", mo:"Ghi nhớ hình ảnh",     lv:["nhe","vua","nang"], run:mLatThe},
+  {id:"nhodovat",  ten:"Nhớ đồ vật",         emo:"🧺", mo:"Trí nhớ ngắn hạn",     lv:["nhe","vua","nang"], run:mNhoDoVat},
+  {id:"nguoithan", ten:"Nhớ người thân",     emo:"👨‍👩‍👧", mo:"Nhớ mặt và tên",  lv:["nhe","vua","nang"], run:mNguoiThan},
+  {id:"cadao",     ten:"Đố ca dao tục ngữ",  emo:"📜", mo:"Ngôn ngữ, trí nhớ xa", lv:["nhe","vua","nang"], run:mCaDao},
+  {id:"goiten",    ten:"Gọi tên đồ vật",     emo:"🔤", mo:"Gọi tên, dùng từ",     lv:["nhe","vua","nang"], run:mGoiTen},
+  {id:"monan",     ten:"Món ăn quê mình",    emo:"🍲", mo:"Món quen theo vùng miền", lv:["nhe","vua","nang"], run:mMonAn},
+  {id:"choque",    ten:"Chợ quê mình",       emo:"🏪", mo:"Nhớ chợ, nhớ địa danh",  lv:["nhe","vua","nang"], run:mChoQue},
+  {id:"quehuong",  ten:"Chuyện quê mình",    emo:"🧭", mo:"Địa danh, đặc sản quê nhà", lv:["nhe","vua","nang"], run:mQueHuong},
+  {id:"phanloai",  ten:"Xếp vào nhóm",       emo:"🗂️", mo:"Suy luận, phân loại",  lv:["nhe","vua"],        run:mPhanLoai},
+  {id:"demtien",   ten:"Đếm tiền đi chợ",    emo:"💵", mo:"Tính toán đời sống",   lv:["nhe","vua"],        run:mDemTien},
+  {id:"timso",     ten:"Tìm số theo thứ tự", emo:"🔢", mo:"Tập trung chú ý",      lv:["nhe","vua"],        run:mTimSo},
+  {id:"vonhip",    ten:"Vỗ tay theo nhịp",   emo:"👏", mo:"Vận động và nhịp điệu",lv:["nhe","vua","nang"], run:mVoNhip},
+  {id:"hoituong",  ten:"Nhớ chuyện xưa",     emo:"🏮", mo:"Hồi tưởng, cảm xúc",   lv:["nhe","vua","nang"], run:mHoiTuong},
+  {id:"thugian",   ten:"Hít thở thư giãn",   emo:"🌬️", mo:"Thư giãn cuối buổi",   lv:["nhe","vua","nang"], run:mThuGian}
+];
+
+const SO_BAI = {nhe:5, vua:4, nang:3};
+
+function planToday(){
+  const avail = MODULES.filter(m=> m.lv.indexOf(S.level) >= 0 && m.id!=="hoituong" && m.id!=="thugian"
+                && (m.id!=="quehuong" || queList().length));
+  const order = seededShuffle(avail, todayKey() + S.level + S.tinh);
+  const n = SO_BAI[S.level];
+  const chon = order.slice(0, Math.max(1, n-2));
+  chon.push(MODULES.find(m=>m.id==="hoituong"));
+  chon.push(MODULES.find(m=>m.id==="thugian"));
+  return chon;
+}
+
+/* =========================================================
+   8. Điều hướng & màn hình
+   ========================================================= */
+
+function show(name){
+  ["home","play","care"].forEach(s=> $("#scr-"+s).hidden = (s !== name));
+  window.scrollTo(0,0);
+}
+function setDots(total, done){
+  const d = $("#dots"); d.innerHTML = "";
+  for(let i=0;i<total;i++){
+    const x = el("span","dot" + (i < done ? " on":""));
+    d.appendChild(x);
+  }
+}
+
+function renderHome(){
+  const now = new Date();
+  $("#hello").textContent = chao(now.getHours());
+  $("#dow").textContent = THU[now.getDay()];
+  $("#date").textContent = "Ngày " + now.getDate() + " tháng " + (now.getMonth()+1) + " năm " + now.getFullYear();
+  $("#part").textContent = mua(now.getMonth()) + " · " + buoi(now.getHours());
+
+  const plan = planToday();
+  const done = plan.filter(m => S.done.indexOf(m.id) >= 0).length;
+  const total = plan.length;
+
+  const r = 42, circ = 2*Math.PI*r;
+  const fg = $("#ringFg");
+  fg.setAttribute("stroke-dasharray", (circ*done/total).toFixed(1) + " " + circ.toFixed(1));
+  $("#ringTxt").textContent = done + "/" + total;
+
+  $("#planMsg").textContent = done === 0
+    ? "Chưa bắt đầu. Mình làm bài đầu tiên nhé."
+    : done < total ? "Còn " + (total-done) + " bài nữa thôi."
+    : "Hôm nay đã tập đủ rồi. Rất tốt!";
+
+  const btn = $("#btnStart");
+  if(done >= total){
+    btn.textContent = "🎉 Hôm nay đã xong — tập lại?";
+    btn.classList.add("done-state");
+  }else{
+    btn.textContent = "Bắt đầu bài tiếp theo";
+    btn.classList.remove("done-state");
+  }
+  btn.onclick = ()=>{
+    const next = plan.find(m => S.done.indexOf(m.id) < 0) || plan[0];
+    playModule(next);
+  };
+
+  const tiles = $("#tiles"); tiles.innerHTML = "";
+  plan.forEach(m=>{
+    const isDone = S.done.indexOf(m.id) >= 0;
+    const t = el("button","tile" + (isDone ? " is-done":""));
+    t.appendChild(el("span","emo", m.emo));
+    const mid = el("span");
+    mid.appendChild(el("span","nm", m.ten));
+    mid.appendChild(el("div","sub", m.mo));
+    t.appendChild(mid);
+    t.appendChild(el("span","state", isDone ? "✓" : "›"));
+    t.onclick = ()=> playModule(m);
+    tiles.appendChild(t);
+  });
+}
+
+function tatMicro(){
+  if(mayGhiHienTai){ try{ mayGhiHienTai.dungHan(); }catch(e){} mayGhiHienTai = null; }
+}
+
+async function playModule(m){
+  aborted = false;
+  tatMicro();
+  show("play");
+  $("#playName").textContent = m.ten;
+  setDots(1, 0);
+  stage.innerHTML = "";
+  let res = null;
+  try{ res = await m.run(S.level); }catch(e){ res = null; }
+  if(aborted || !res){ return; }
+
+  if(S.done.indexOf(m.id) < 0) S.done.push(m.id);
+  S.log.push({d:todayKey(), m:m.id, c:res.c, t:res.t});
+  if(S.log.length > 400) S.log = S.log.slice(-400);
+  save();
+  celebrate(m, res);
+}
+
+function celebrate(m, res){
+  const pct = res.t ? res.c/res.t : 1;
+  const stars = pct >= 0.8 ? "⭐⭐⭐" : pct >= 0.5 ? "⭐⭐" : "⭐";
+  stage.innerHTML = "";
+  const c = el("div","celebrate");
+  c.appendChild(el("div","stars", stars));
+  c.appendChild(el("h2","Xong bài rồi!"));
+  c.appendChild(el("p","Bài “" + m.ten + "” đã hoàn thành. Cảm ơn sự cố gắng hôm nay."));
+  stage.appendChild(c);
+  say("Xong rồi. Giỏi lắm!");
+
+  const plan = planToday();
+  const next = plan.find(x => S.done.indexOf(x.id) < 0);
+  if(next){
+    const b = el("button","nextbtn", "Bài tiếp theo: " + next.ten + " →");
+    b.onclick = ()=> playModule(next);
+    stage.appendChild(b);
+  }
+  const home = el("button","ghostbtn","Về trang chính");
+  home.onclick = ()=>{ renderHome(); show("home"); };
+  stage.appendChild(home);
+  setDots(1,1);
+}
+
+/* =========================================================
+   9. Góc người chăm sóc
+   ========================================================= */
+
+const MO_TA_MUC = {
+  nhe: "Nhẹ — còn tự sinh hoạt, hay quên việc mới. 4 lựa chọn mỗi câu, 5 bài mỗi ngày, có bài tính tiền và tìm số.",
+  vua: "Trung bình — cần nhắc nhở nhiều việc. 3 lựa chọn mỗi câu, 4 bài mỗi ngày, hình to và ít chi tiết hơn.",
+  nang: "Nặng — giao tiếp hạn chế. Chỉ 2 lựa chọn, 3 bài ngắn, thiên về hình ảnh quen thuộc, nhịp điệu và hồi tưởng."
+};
+
+const MO_TA_VUNG = {
+  nam: "Nam Bộ — ca dao lục tỉnh (Châu Đốc, Gò Công, Đồng Tháp Mười…), món hủ tiếu, canh chua, cá kho tộ, bánh xèo; chợ Bến Thành, Bình Tây, chợ nổi Cái Răng, Cái Bè. Có gói riêng cho Long An.",
+  trung: "Trung Bộ — ca dao xứ Nghệ, xứ Huế, Quảng Nam, Bình Định; món bún bò Huế, mì Quảng, cao lầu, cơm hến; chợ Đông Ba, chợ Hàn, chợ Đầm.",
+  bac: "Bắc Bộ — ca dao Thăng Long, Kinh Bắc, Nam Định; món phở, bún chả, bánh cuốn, bánh chưng; chợ Đồng Xuân, chợ Viềng, chợ Sắt, chợ Bắc Hà."
+};
+
+function renderTinh(){
+  const box = $("#chipTinh"); box.innerHTML = "";
+  const ds = Object.keys(TINH).filter(k => TINH[k].vung === S.vung);
+  const mk = (id, nhan)=>{
+    const b = el("button", null, nhan);
+    b.setAttribute("aria-pressed", String(S.tinh === id));
+    b.onclick = ()=>{ S.tinh = id; save(); renderCare(); };
+    box.appendChild(b);
+  };
+  mk("", "Không chọn riêng");
+  ds.forEach(k => mk(k, TINH[k].ten));
+
+  const t = goiTinh();
+  $("#tinhDesc").textContent = t
+    ? "Đang dùng gói " + t.ten + ": " + t.que.length + " câu hỏi về địa danh và đặc sản, " +
+      t.monAn.length + " món ăn, " + t.cho.length + " chợ, " + t.hoiTuong.length +
+      " câu hỏi hồi tưởng, và bài “Chuyện quê mình”. Tên huyện, tên chợ để theo cách gọi quen thuộc ngày trước — đó là những tên người bệnh còn nhớ."
+    : ds.length
+      ? "Chưa chọn tỉnh nào — đang dùng nội dung chung của cả vùng."
+      : "Chưa có gói riêng cho tỉnh nào trong vùng này.";
+}
+
+function renderCare(){
+  document.querySelectorAll("#segLevel button").forEach(b=>
+    b.setAttribute("aria-pressed", String(b.dataset.lv === S.level)));
+  $("#levelDesc").textContent = MO_TA_MUC[S.level];
+  document.querySelectorAll("#segVung button").forEach(b=>
+    b.setAttribute("aria-pressed", String(b.dataset.vung === S.vung)));
+  $("#vungDesc").textContent = MO_TA_VUNG[S.vung];
+  renderTinh();
+  document.querySelectorAll("#segFont button").forEach(b=>
+    b.setAttribute("aria-pressed", String(Math.abs(parseFloat(b.dataset.fs) - S.fontScale) < 0.01)));
+
+  const pe = $("#people"); pe.innerHTML = "";
+  if(!S.people.length){
+    pe.appendChild(el("div","hint","Chưa có ai. Bài “Nhớ người thân” đang dùng hình ví dụ."));
+  }
+  S.people.forEach((p,i)=>{
+    const card = el("div","person");
+    if(p.img){ const im=document.createElement("img"); im.src=p.img; im.alt=p.name; card.appendChild(im); }
+    else card.appendChild(el("div","pe","🧓"));
+    card.appendChild(el("div","pn", p.name));
+    card.appendChild(el("div","pr", p.rel || ""));
+    const del = el("button",null,"Xóa");
+    del.onclick = ()=>{ S.people.splice(i,1); save(); renderCare(); };
+    card.appendChild(del);
+    pe.appendChild(card);
+  });
+
+  renderStats();
+  renderChart();
+  renderMic();
+
+  const nl = $("#notes"); nl.innerHTML = "";
+  if(!S.notes.length) nl.appendChild(el("li",null,"Chưa có ghi chú nào."));
+  S.notes.slice(0,12).forEach((n, idx)=>{
+    const li = el("li");
+    li.appendChild(el("div","nd", n.d + " · " + n.q));
+    if(n.t) li.appendChild(el("div",null, n.t));
+    if(n.am) themBanGhi(li, n, idx);
+    nl.appendChild(li);
+  });
+
+  try{ $("#backup").value = JSON.stringify(S); }catch(e){ $("#backup").value = ""; }
+}
+
+/* mỗi ghi chú có bản ghi âm thì kèm chỗ nghe lại và nút lưu file */
+function themBanGhi(li, n, idx){
+  const mo = el("div","nd", "🎙️ Bản ghi giọng nói" + (n.giay ? " · " + dongHo(n.giay) : ""));
+  mo.style.marginTop = "8px";
+  li.appendChild(mo);
+
+  const nghe = document.createElement("audio");
+  nghe.controls = true; nghe.preload = "none";
+  li.appendChild(nghe);
+
+  const acts = el("div","note-acts");
+  const bLuu = el("button", null, "⬇️ Lưu file .mp3");
+  const bXoa = el("button", null, "🗑 Xóa bản ghi");
+  acts.appendChild(bLuu); acts.appendChild(bXoa);
+  li.appendChild(acts);
+
+  let blob = null;
+  amDoc(n.am).then(b=>{
+    if(!b){ mo.textContent = "🎙️ Không tìm thấy bản ghi trong máy này"; nghe.remove(); acts.remove(); return; }
+    blob = b;
+    nghe.src = URL.createObjectURL(b);
+  }).catch(()=>{
+    mo.textContent = "🎙️ Máy không mở được kho ghi âm";
+    nghe.remove(); acts.remove();
+  });
+
+  bLuu.onclick = async ()=>{
+    if(!blob) return;
+    bLuu.disabled = true;
+    await luuAmThanh(blob, n.ext || "webm", n.d, txt => bLuu.textContent = txt);
+    setTimeout(()=>{ bLuu.textContent = "⬇️ Lưu file .mp3"; bLuu.disabled = false; }, 2800);
+  };
+  bXoa.onclick = ()=>{
+    if(bXoa.dataset.chac !== "1"){
+      bXoa.dataset.chac = "1"; bXoa.textContent = "Bấm lần nữa để xóa hẳn";
+      setTimeout(()=>{ bXoa.dataset.chac = "0"; bXoa.textContent = "🗑 Xóa bản ghi"; }, 4000);
+      return;
+    }
+    amXoa(n.am).catch(()=>{});
+    delete S.notes[idx].am; delete S.notes[idx].ext; delete S.notes[idx].giay;
+    if(!S.notes[idx].t) S.notes.splice(idx,1);
+    save(); renderCare();
+  };
+}
+
+/* giuKetQua: giữ nguyên dòng kết luận vừa hiện sau khi bấm thử micro */
+async function renderMic(giuKetQua){
+  const ul = $("#micInfo"); ul.innerHTML = "";
+  const dong = (k, v)=>{
+    const li = el("li");
+    li.appendChild(el("div","nd", k));
+    li.appendChild(el("div", null, v));
+    ul.appendChild(li);
+  };
+  const gt = location.protocol.replace(":","");
+  dong("Cách mở trang", gt === "file" ? "file trong máy — Chrome Android khóa micro"
+                      : gt === "https" ? "https — tốt" : gt);
+  dong("Địa chỉ", gt === "file" ? "(file trong máy)" : location.origin);
+  if(window.NhoVuiAndroid) dong("Ứng dụng Android", "có — micro dùng quyền của ứng dụng");
+  dong("Kết nối an toàn", window.isSecureContext ? "có" : "không");
+  dong("Trình duyệt biết ghi âm", (navigator.mediaDevices && window.MediaRecorder) ? "có" : "không");
+  const trongKhung = trongKhungNhung();
+  dong("Nằm trong khung nhúng", trongKhung ? "có" : "không");
+  const kc = khungChanMicro();
+  dong("Khung cho phép micro", kc === true ? "KHÔNG — khóa nằm ở đây"
+                             : kc === false ? "có" : "trình duyệt không trả lời");
+  const tt = await trangThaiQuyenMicro();
+  dong("Quyền micro", {granted:"đã cho phép", denied:"đang bị chặn",
+                       prompt:"sẽ hỏi khi dùng"}[tt] || "không rõ");
+  if(giuKetQua) return;
+  const can = canTroMicro();
+  const kq = $("#micKetQua");
+  if(can)                  { kq.textContent = can.loi + GOI_Y_MAY;     kq.style.color = "var(--gold)"; }
+  else if(tt === "denied") { kq.textContent = loiBiChan() + GOI_Y_MAY; kq.style.color = "var(--gold)"; }
+  else { kq.textContent = "Không thấy trở ngại nào. Bấm nút dưới để thử thật."; kq.style.color = "var(--muted)"; }
+}
+
+function last7(){
+  const out = [];
+  for(let i=6;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const k = todayKey(d);
+    const rows = S.log.filter(r=>r.d === k);
+    const ids = new Set(rows.map(r=>r.m));
+    out.push({
+      key:k, dow:["CN","T2","T3","T4","T5","T6","T7"][d.getDay()],
+      bai: ids.size,
+      c: rows.reduce((a,b)=>a+b.c,0), t: rows.reduce((a,b)=>a+b.t,0)
+    });
+  }
+  return out;
+}
+
+function renderStats(){
+  const d = last7();
+  const tongBai = d.reduce((a,b)=>a+b.bai,0);
+  const c = d.reduce((a,b)=>a+b.c,0), t = d.reduce((a,b)=>a+b.t,0);
+  const pct = t ? Math.round(100*c/t) : 0;
+  let streak = 0;
+  for(let i=d.length-1;i>=0;i--){ if(d[i].bai>0) streak++; else break; }
+  const box = $("#stats"); box.innerHTML = "";
+  [[tongBai,"bài trong 7 ngày"],[pct+"%","làm đúng ngay lần đầu"],[streak,"ngày liên tiếp"]].forEach(p=>{
+    const s = el("div","stat");
+    s.appendChild(el("div","v", String(p[0])));
+    s.appendChild(el("div","k", p[1]));
+    box.appendChild(s);
+  });
+}
+
+function renderChart(){
+  const data = last7();
+  const svg = $("#chart");
+  const W=560, H=240, L=42, R=16, T=22, B=52;
+  const pw = W-L-R, ph = H-T-B;
+  const maxV = Math.max(4, ...data.map(d=>d.bai));
+  const ticks = [0, Math.ceil(maxV/2), maxV];
+  const bw = pw/data.length;
+  const barW = Math.min(46, bw*0.56);
+  const y = v => T + ph - (v/maxV)*ph;
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (n,a)=>{ const e=document.createElementNS(NS,n); for(const k in a) e.setAttribute(k,a[k]); return e; };
+
+  svg.innerHTML = "";
+  ticks.forEach(v=>{
+    svg.appendChild(mk("line",{x1:L, x2:W-R, y1:y(v), y2:y(v),
+      stroke:"var(--line)", "stroke-width":v===0?1.5:1}));
+    const tx = mk("text",{x:L-10, y:y(v)+5, "text-anchor":"end", fill:"var(--muted)",
+      "font-size":13, "font-family":"Be Vietnam Pro, sans-serif"});
+    tx.textContent = String(v); svg.appendChild(tx);
+  });
+
+  data.forEach((d,i)=>{
+    const cx = L + bw*i + bw/2;
+    if(d.bai > 0){
+      const h = Math.max(4, T+ph-y(d.bai));
+      const rect = mk("path",{ d: roundTopRect(cx-barW/2, y(d.bai), barW, h, 4), fill:"var(--bar)" });
+      const ttl = document.createElementNS(NS,"title");
+      ttl.textContent = d.dow + " " + d.key + ": " + d.bai + " bài, đúng " +
+        (d.t ? Math.round(100*d.c/d.t) : 0) + "%";
+      rect.appendChild(ttl);
+      svg.appendChild(rect);
+      const vl = mk("text",{x:cx, y:y(d.bai)-8, "text-anchor":"middle", fill:"var(--ink)",
+        "font-size":14, "font-weight":700, "font-family":"Be Vietnam Pro, sans-serif"});
+      vl.textContent = String(d.bai); svg.appendChild(vl);
+    }else{
+      const z = mk("circle",{cx:cx, cy:T+ph, r:3, fill:"var(--line-strong)"});
+      const ttl = document.createElementNS(NS,"title");
+      ttl.textContent = d.dow + " " + d.key + ": nghỉ";
+      z.appendChild(ttl); svg.appendChild(z);
+    }
+    const lb = mk("text",{x:cx, y:H-28, "text-anchor":"middle", fill:"var(--ink-2)",
+      "font-size":14, "font-weight":600, "font-family":"Be Vietnam Pro, sans-serif"});
+    lb.textContent = d.dow; svg.appendChild(lb);
+    const db = mk("text",{x:cx, y:H-10, "text-anchor":"middle", fill:"var(--muted)",
+      "font-size":11, "font-family":"Be Vietnam Pro, sans-serif"});
+    db.textContent = d.key.slice(8) + "/" + d.key.slice(5,7); svg.appendChild(db);
+  });
+}
+function roundTopRect(x,y,w,h,r){
+  r = Math.min(r, w/2, h);
+  return "M"+x+","+(y+h)+" L"+x+","+(y+r)+" Q"+x+","+y+" "+(x+r)+","+y+
+         " L"+(x+w-r)+","+y+" Q"+(x+w)+","+y+" "+(x+w)+","+(y+r)+" L"+(x+w)+","+(y+h)+" Z";
+}
+
+/* ảnh: thu nhỏ trước khi lưu để không đầy bộ nhớ trình duyệt */
+function shrink(file, size){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const s = Math.min(img.width, img.height);
+        const cv = document.createElement("canvas");
+        cv.width = size; cv.height = size;
+        const ctx = cv.getContext("2d");
+        ctx.drawImage(img, (img.width-s)/2, (img.height-s)/2, s, s, 0, 0, size, size);
+        res(cv.toDataURL("image/jpeg", 0.78));
+      };
+      img.onerror = rej; img.src = fr.result;
+    };
+    fr.onerror = rej;
+    fr.readAsDataURL(file);
+  });
+}
+
+/* =========================================================
+   10. Gắn sự kiện
+   ========================================================= */
+
+function applyFont(){ document.documentElement.style.fontSize = (19*S.fontScale) + "px"; }
+
+$("#btnVoice").onclick = function(){
+  S.voice = !S.voice; save();
+  this.setAttribute("aria-pressed", String(S.voice));
+  this.textContent = S.voice ? "🔊" : "🔇";
+  if(S.voice) say("Đã bật giọng đọc"); else { try{ speechSynthesis.cancel(); }catch(e){} }
+};
+$("#btnCare").onclick = ()=>{ renderCare(); show("care"); };
+$("#btnCareBack").onclick = ()=>{ renderHome(); show("home"); };
+$("#btnExit").onclick = ()=>{
+  aborted = true;
+  tatMicro();
+  try{ speechSynthesis.cancel(); }catch(e){}
+  renderHome(); show("home");
+};
+
+document.querySelectorAll("#segLevel button").forEach(b=>{
+  b.onclick = ()=>{ S.level = b.dataset.lv; S.done = []; save(); renderCare(); };
+});
+document.querySelectorAll("#segVung button").forEach(b=>{
+  b.onclick = ()=>{
+    S.vung = b.dataset.vung;
+    if(S.tinh && (!TINH[S.tinh] || TINH[S.tinh].vung !== S.vung)) S.tinh = "";
+    save(); renderCare();
+  };
+});
+document.querySelectorAll("#segFont button").forEach(b=>{
+  b.onclick = ()=>{ S.fontScale = parseFloat(b.dataset.fs); save(); applyFont(); renderCare(); };
+});
+
+$("#btnAddPerson").onclick = async ()=>{
+  const name = $("#pName").value.trim();
+  const rel  = $("#pRel").value.trim();
+  const f    = $("#pImg").files[0];
+  if(!name){ $("#pName").focus(); return; }
+  let img = null;
+  if(f){ try{ img = await shrink(f, 320); }catch(e){ img = null; } }
+  S.people.push({name, rel, img});
+  try{ save(); }
+  catch(e){}
+  $("#pName").value = ""; $("#pRel").value = ""; $("#pImg").value = "";
+  renderCare();
+};
+
+$("#btnTestMic").onclick = async ()=>{
+  const b = $("#btnTestMic"), kq = $("#micKetQua");
+  const can = canTroMicro();
+  if(can){ kq.textContent = can.loi + GOI_Y_MAY; kq.style.color = "var(--gold)"; return; }
+  b.disabled = true; b.textContent = "Đang thử…";
+  try{
+    const s = await navigator.mediaDevices.getUserMedia({audio:true});
+    s.getTracks().forEach(t=>t.stop());
+    kq.textContent = "Micro mở được. Bài “Nhớ chuyện xưa” ghi âm bình thường.";
+    kq.style.color = "var(--good)";
+  }catch(e){
+    kq.textContent = (await giaiThichLoiMicro(e)) + GOI_Y_MAY;
+    kq.style.color = "var(--gold)";
+  }
+  b.textContent = "Thử mở micro"; b.disabled = false;
+  renderMic(true);
+};
+
+$("#btnCopy").onclick = ()=>{
+  const ta = $("#backup");
+  ta.select();
+  try{ navigator.clipboard.writeText(ta.value); }catch(e){ try{ document.execCommand("copy"); }catch(e2){} }
+  $("#btnCopy").textContent = "Đã chép ✓";
+  setTimeout(()=> $("#btnCopy").textContent = "Chép dữ liệu", 1800);
+};
+
+/* =========================================================
+   11. Khởi động
+   ========================================================= */
+
+load();
+applyFont();
+$("#btnVoice").setAttribute("aria-pressed", String(S.voice));
+$("#btnVoice").textContent = S.voice ? "🔊" : "🔇";
+renderHome();
+show("home");
+
+/* ngày mới thì làm mới trang chính khi mở lại ứng dụng */
+document.addEventListener("visibilitychange", ()=>{
+  if(!document.hidden && S.day !== todayKey()){
+    S.day = todayKey(); S.done = []; save();
+    if(!$("#scr-home").hidden) renderHome();
+  }
+});
+
+})();
+</script>

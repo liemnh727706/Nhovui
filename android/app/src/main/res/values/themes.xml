@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nền giấy ấm, cùng tông với nền trang web, để lúc mở app không chớp trắng -->
+    <style name="Theme.NhoVui" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/nen</item>
+        <item name="android:statusBarColor">@color/nen</item>
+        <item name="android:navigationBarColor">@color/nen</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
